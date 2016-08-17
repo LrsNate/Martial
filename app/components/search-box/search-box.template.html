@@ -1,7 +1,8 @@
 <h3>Recherche: </h3>
 
-<button type="button">Ajouter un filtre</button>
+<button type="button" ng-click="$ctrl.addFilter()">Ajouter un filtre</button>
 
 <div ng-repeat="filter in $ctrl.filters">
-    <search-filter filter="filter" on-delete="deleteFilter($index)"></search-filter>
+    <p>{{$index}}</p>
+    <search-filter filter="filter" on-delete="$ctrl.deleteFilter($index)"></search-filter>
 </div>
