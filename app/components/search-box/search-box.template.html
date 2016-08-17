@@ -3,6 +3,5 @@
 <button type="button" ng-click="$ctrl.addFilter()">Ajouter un filtre</button>
 
 <div ng-repeat="filter in $ctrl.filters">
-    <p>{{$index}}</p>
     <search-filter filter="filter" on-delete="$ctrl.deleteFilter($index)"></search-filter>
 </div>
