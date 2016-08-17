@@ -1,8 +1,6 @@
-<p>This is the partial for view 1.</p>
-
-{{filters}}
-
 <search-box filters="$ctrl.filters"></search-box>
+
+<hr/>
 
 <table class="table table-striped">
     <thead>
@@ -20,3 +18,16 @@
         </tr>
     </tbody>
 </table>
+
+<hr/>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h5>Texte latin</h5>
+        <pre>{{ $ctrl.selectedWork.latinText }}</pre>
+    </div>
+    <div class="col-sm-6">
+        <h5>Texte français</h5>
+        <pre>{{ $ctrl.selectedWork.frenchText }}</pre>
+    </div>
+</div>

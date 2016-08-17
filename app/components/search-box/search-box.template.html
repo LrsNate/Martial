@@ -1,6 +1,11 @@
-<h3>Recherche: </h3>
-
-<button type="button" ng-click="$ctrl.addFilter()">Ajouter un filtre</button>
+<h3>Recherche:
+    <button type="button"
+            class="btn btn-sm btn-success"
+            ng-click="$ctrl.addFilter()">
+        <span class="glyphicon glyphicon-plus"></span>
+        Filtre
+    </button>
+</h3>
 
 <div ng-repeat="filter in $ctrl.filters">
     <search-filter filter="filter" on-delete="$ctrl.deleteFilter($index)"></search-filter>

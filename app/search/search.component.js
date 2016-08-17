@@ -12,12 +12,19 @@ angular
     .component('search', {
         templateUrl: 'search/search.template.html',
         controller: [function () {
+
+            this.setSelectedWork = function (index) {
+                this.selectedWork = this.works[index];
+            };
+
             this.filters = [];
             this.works = [
                 {
                     author: 'Martial',
                     reference: 'I, 15',
-                    title: 'Ad Julium'
+                    title: 'Ad Julium',
+                    latinText: 'abcdef',
+                    frenchText: 'fghijkl'
                 },
                 {
                     author: 'Martial',
@@ -25,5 +32,6 @@ angular
                     title: 'Ad Avitum, de suo libro'
                 }
             ];
+            this.selectedWork = this.works[0];
         }]
     });
