@@ -19,8 +19,8 @@ describe('my app', function() {
 
 
     it('should render search when user navigates to /search', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
+      expect(element.all(by.css('[ng-view] h3')).first().getText()).
+        toMatch(/Recherche/);
     });
 
   });
