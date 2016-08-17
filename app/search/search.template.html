@@ -4,3 +4,19 @@
 
 <search-box filters="$ctrl.filters"></search-box>
 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Auteur</th>
+            <th>Référence</th>
+            <th>Titre</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="work in $ctrl.works">
+            <td>{{ work.author }}</td>
+            <td>{{ work.reference }}</td>
+            <td>{{ work.title }}</td>
+        </tr>
+    </tbody>
+</table>
