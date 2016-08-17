@@ -4,7 +4,10 @@ angular
     .module('myApp.searchFilter')
     .component('searchFilter', {
         templateUrl: 'components/search-filter/search-filter.template.html',
-        bindings: {filter: '='},
+        bindings: {
+            filter: '=',
+            onDelete: '&'
+        },
         controller: ['$filter', function ($filter) {
             this.fields = [
                 {name: 'Auteur', id: 'author', type: 'string'},

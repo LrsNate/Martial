@@ -1,0 +1,7 @@
+<h3>Recherche: </h3>
+
+<button type="button">Ajouter un filtre</button>
+
+<div ng-repeat="filter in $ctrl.filters">
+    <search-filter filter="filter" on-delete="deleteFilter($index)"></search-filter>
+</div>
