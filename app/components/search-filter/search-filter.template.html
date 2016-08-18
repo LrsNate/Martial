@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row filter-row">
     <div class="col-sm-2 filter-cell-left">
         <select class="form-control input-sm"
                 ng-options="field.id as field.name for field in $ctrl.fields track by field.id"
@@ -11,10 +11,8 @@
                             track by matcher.id"
                 ng-model="$ctrl.filter.matcher"></select>
     </div>
-    <div class="col-sm-7 filter-cell-center">
+    <div class="col-sm-8 filter-cell-right">
         <input class="form-control input-sm" ng-model="$ctrl.filter.term" />
-    </div>
-    <div class="col-sm-1 filter-cell-right">
         <button type="button" class="btn btn-sm btn-danger" ng-click="$ctrl.onDelete()">
             <span class="glyphicon glyphicon-remove"></span>
         </button>

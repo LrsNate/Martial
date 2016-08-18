@@ -1,3 +1,7 @@
+.filter-row {
+    margin-bottom: 10px;
+}
+
 .filter-cell-left {
     padding-right: 5px;
 }
@@ -9,4 +13,13 @@
 
 .filter-cell-right {
     padding-left: 5px;
+    display: flex;
+}
+
+.filter-cell-right button {
+    margin-left: 10px;
+}
+
+.keyword-filter {
+    margin-top: 20px;
 }
