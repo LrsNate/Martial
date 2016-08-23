@@ -11,27 +11,30 @@ angular
 
     .component('search', {
         templateUrl: 'search/search.template.html',
-        controller: [function () {
+        controller: ['databaseConnector', function (databaseConnector) {
+
 
             this.setSelectedWork = function (index) {
                 this.selectedWork = this.works[index];
             };
 
             this.filters = [];
-            this.works = [
-                {
-                    author: 'Martial',
-                    reference: 'I, 15',
-                    title: 'Ad Julium',
-                    latinText: 'abcdef',
-                    frenchText: 'fghijkl'
-                },
-                {
-                    author: 'Martial',
-                    reference: 'I, 16',
-                    title: 'Ad Avitum, de suo libro'
-                }
-            ];
+            // this.works = [
+            //     {
+            //         author: 'Martial',
+            //         reference: 'I, 15',
+            //         title: 'Ad Julium',
+            //         latinText: 'abcdef',
+            //         frenchText: 'fghijkl'
+            //     },
+            //     {
+            //         author: 'Martial',
+            //         reference: 'I, 16',
+            //         title: 'Ad Avitum, de suo libro'
+            //     }
+            // ];
+            this.works = databaseConnector.getWorks();
+
             this.selectedWork = this.works[0];
         }]
     });

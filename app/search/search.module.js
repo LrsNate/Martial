@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('myApp.search', ['myApp.searchBox', 'ngRoute']);
+angular.module('myApp.search', ['myApp.searchBox', 'myApp.databaseConnector', 'ngRoute']);
