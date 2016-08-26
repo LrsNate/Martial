@@ -2,17 +2,22 @@
     <div class="col-sm-2 filter-cell-left">
         <select class="form-control input-sm"
                 ng-options="field.id as field.name for field in $ctrl.fields track by field.id"
-                ng-model="$ctrl.filter.field"></select>
+                ng-model="$ctrl.filter.field">
+            <option value="" disabled selected>Champ</option>
+        </select>
     </div>
     <div class="col-sm-2 filter-cell-center">
         <select class="form-control input-sm"
                 ng-options="matcher.id as matcher.name
                             for matcher in $ctrl.getMatchers($ctrl.filter.field)
                             track by matcher.id"
-                ng-model="$ctrl.filter.matcher"></select>
+                ng-model="$ctrl.filter.matcher">
+            <option value="" disabled selected>Sélecteur</option>
+        </select>
     </div>
     <div class="col-sm-8 filter-cell-right">
-        <input class="form-control input-sm" ng-model="$ctrl.filter.term" />
+        <input class="form-control input-sm" ng-model="$ctrl.filter.term"
+               placeholder="Terme à rechercher" />
         <button type="button" class="btn btn-sm btn-danger" ng-click="$ctrl.onDelete()">
             <span class="glyphicon glyphicon-remove"></span>
         </button>

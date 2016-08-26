@@ -1,0 +1,20 @@
+<div class="text-display-header container-fluid" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
+    <div  class="text-display-caret">
+        <span class="glyphicon"
+              ng-class="{'glyphicon-chevron-down': !$ctrl.isCollapsed, 'glyphicon-chevron-up': $ctrl.isCollapsed}">
+        </span>
+    </div>
+    <p><strong>{{ $ctrl.work.author }}</strong> - {{ $ctrl.work.reference }}</p>
+</div>
+<div class="text-display container-fluid" uib-collapse="$ctrl.isCollapsed">
+    <div class="row">
+        <div class="col-sm-6">
+            <h5>Texte latin</h5>
+            <div class="well text-well">{{ $ctrl.work.latinText }}</div>
+        </div>
+        <div class="col-sm-6">
+            <h5>Texte français</h5>
+            <div class="well text-well">{{ $ctrl.work.frenchText }}</div>
+        </div>
+    </div>
+</div>

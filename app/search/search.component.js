@@ -13,26 +13,18 @@ angular
         templateUrl: 'search/search.template.html',
         controller: ['databaseConnector', function (databaseConnector) {
 
+            this.fullWorks = databaseConnector.getWorks();
+            this.works = this.fullWorks;
 
-            this.setSelectedWork = function (index) {
-                this.selectedWork = this.works[index];
+            this.setSelectedWork = function (work) {
+                this.selectedWork = work;
+            };
+
+            this.filterByReference = function (work) {
+                this.works = databaseConnector.getImitations(work.reference);
             };
 
             this.filters = [];
-            // this.works = [
-            //     {
-            //         author: 'Martial',
-            //         reference: 'I, 15',
-            //         title: 'Ad Julium',
-            //         latinText: 'abcdef',
-            //         frenchText: 'fghijkl'
-            //     },
-            //     {
-            //         author: 'Martial',
-            //         reference: 'I, 16',
-            //         title: 'Ad Avitum, de suo libro'
-            //     }
-            // ];
             this.works = databaseConnector.getWorks();
 
             this.selectedWork = this.works[0];

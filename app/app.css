@@ -23,3 +23,34 @@
 .keyword-filter {
     margin-top: 20px;
 }
+
+.text-display-header {
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px solid lightgrey;
+    display: flex;
+}
+
+.text-display-caret {
+    width: 40px;
+    text-align: center;
+}
+
+.text-display {
+    border-top: 1px solid lightgrey;
+}
+
+.text-well {
+    white-space: pre-line;
+}
+
+text-display {
+    box-shadow: 10px 10px 5px #888888;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /*margin-left: 0;*/
+    /*padding-left: 0;*/
+    background: white;
+    overflow: scroll;
+}

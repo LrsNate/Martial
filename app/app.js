@@ -3,6 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
     'ngRoute',
+    'ngAnimate',
+    'ui.bootstrap',
     'myApp.search',
     'myApp.version'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {

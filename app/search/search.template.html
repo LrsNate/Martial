@@ -1,33 +1,27 @@
-<search-box filters="$ctrl.filters"></search-box>
+<div class="container-fluid">
+    <search-box filters="$ctrl.filters"></search-box>
 
-<hr/>
+    <hr/>
 
-<table class="table table-striped">
-    <thead>
+    <table class="table table-striped">
+        <thead>
         <tr>
             <th>Auteur</th>
             <th>Référence</th>
-            <th>Titre</th>
+            <th>Texte</th>
+            <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="work in $ctrl.works">
+        </thead>
+        <tbody>
+        <tr ng-repeat="work in $ctrl.works" ng-click="$ctrl.setSelectedWork(work)">
             <td>{{ work.author }}</td>
             <td>{{ work.reference }}</td>
-            <td>{{ work.title }}</td>
+            <td>{{ work.latinText || work.frenchText | limitTo: 50 }}...</td>
+            <td><button type="button" ng-click="$ctrl.filterByReference(work)"
+                        class="btn btn-sm btn-default">Imitations</button></td>
         </tr>
-    </tbody>
-</table>
-
-<hr/>
-
-<div class="row">
-    <div class="col-sm-6">
-        <h5>Texte latin</h5>
-        <pre>{{ $ctrl.selectedWork.latinText }}</pre>
-    </div>
-    <div class="col-sm-6">
-        <h5>Texte français</h5>
-        <pre>{{ $ctrl.selectedWork.frenchText }}</pre>
-    </div>
+        </tbody>
+    </table>
 </div>
+
+<text-display work="$ctrl.selectedWork"></text-display>
