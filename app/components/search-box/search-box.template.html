@@ -5,6 +5,12 @@
         <span class="glyphicon glyphicon-plus"></span>
         Filtre
     </button>
+    <button type="button"
+            class="btn btn-sm btn-default"
+            ng-click="$ctrl.reset()">
+        <span class="glyphicon glyphicon-refresh"></span>
+        Réinitialiser
+    </button>
 </h3>
 
 <div ng-repeat="filter in $ctrl.filters">

@@ -3,8 +3,8 @@
 var low = require('lowdb');
 
 angular
-    .module('myApp.databaseConnector')
-    .factory('databaseConnector', [function () {
+    .module('myApp.worksDao')
+    .factory('worksDao', [function () {
         return {
             db: low('/Users/Nate/Downloads/works.json'),
             getWorks: function () {
@@ -13,7 +13,6 @@ angular
 
             getImitations: function (martialReference) {
                 return this.db.get('works')
-                    // FIXME?
                     .filter(function (o) {
                         return o.martialReference === martialReference || o.reference === martialReference;
                     })

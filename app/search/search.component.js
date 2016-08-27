@@ -11,9 +11,9 @@ angular
 
     .component('search', {
         templateUrl: 'search/search.template.html',
-        controller: ['databaseConnector', function (databaseConnector) {
+        controller: ['worksDao', function (worksDao) {
 
-            this.fullWorks = databaseConnector.getWorks();
+            this.fullWorks = worksDao.getWorks();
             this.works = this.fullWorks;
 
             this.setSelectedWork = function (work) {
@@ -21,11 +21,13 @@ angular
             };
 
             this.filterByReference = function (work) {
-                this.works = databaseConnector.getImitations(work.reference);
+                this.filters = [
+                    {field: 'work', matcher: 'imitates', term: work.reference}
+                ];
             };
 
             this.filters = [];
-            this.works = databaseConnector.getWorks();
+            this.works = worksDao.getWorks();
 
             this.selectedWork = this.works[0];
         }]

@@ -29,6 +29,7 @@
     line-height: 40px;
     border-top: 1px solid lightgrey;
     display: flex;
+    cursor: default;
 }
 
 .text-display-caret {
@@ -38,6 +39,8 @@
 
 .text-display {
     border-top: 1px solid lightgrey;
+    max-height: 70vh;
+    overflow: auto;
 }
 
 .text-well {
@@ -49,8 +52,6 @@ text-display {
     position: fixed;
     bottom: 0;
     width: 100%;
-    /*margin-left: 0;*/
-    /*padding-left: 0;*/
     background: white;
     overflow: scroll;
 }

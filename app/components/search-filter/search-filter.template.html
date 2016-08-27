@@ -1,18 +1,19 @@
 <div class="row filter-row">
     <div class="col-sm-2 filter-cell-left">
         <select class="form-control input-sm"
-                ng-options="field.id as field.name for field in $ctrl.fields track by field.id"
                 ng-model="$ctrl.filter.field">
-            <option value="" disabled selected>Champ</option>
+            <option value="" disabled>Champ</option>
+            <option ng-repeat="field in $ctrl.fields" value="{{ field.id }}">{{ field.name }}</option>
         </select>
     </div>
     <div class="col-sm-2 filter-cell-center">
         <select class="form-control input-sm"
-                ng-options="matcher.id as matcher.name
-                            for matcher in $ctrl.getMatchers($ctrl.filter.field)
-                            track by matcher.id"
                 ng-model="$ctrl.filter.matcher">
-            <option value="" disabled selected>Sélecteur</option>
+            <option value="" disabled>Sélecteur</option>
+            <option ng-repeat="matcher in $ctrl.getMatchers($ctrl.filter.field)"
+                    value="{{ matcher.id }}">
+                {{ matcher.name }}
+            </option>
         </select>
     </div>
     <div class="col-sm-8 filter-cell-right">

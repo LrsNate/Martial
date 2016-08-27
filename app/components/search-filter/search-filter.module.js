@@ -1,3 +1,5 @@
 'use strict';
 
-angular.module('myApp.searchFilter', []);
+angular.module('myApp.searchFilter', [
+    'myApp.searchFieldsDao'
+]);

@@ -15,5 +15,9 @@ angular
         this.addFilter = function () {
             this.filters.push({});
         };
+
+        this.reset = function () {
+            this.filters = [];
+        };
     }]
 });

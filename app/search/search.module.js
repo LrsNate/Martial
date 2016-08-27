@@ -3,6 +3,6 @@
 angular.module('myApp.search', [
     'myApp.searchBox',
     'myApp.textDisplay',
-    'myApp.databaseConnector',
+    'myApp.worksDao',
     'ngRoute'
 ]);
