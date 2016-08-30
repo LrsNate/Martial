@@ -51,6 +51,10 @@
     white-space: pre-line;
 }
 
+.works-status {
+    text-align: center;
+}
+
 text-display {
     box-shadow: 10px 10px 5px #888888;
     position: fixed;

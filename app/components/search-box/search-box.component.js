@@ -5,7 +5,9 @@ angular
     .component('searchBox', {
     templateUrl: 'components/search-box/search-box.template.html',
     bindings: {
-        filters: '='
+        filters: '=',
+        phraseFilter: '=',
+        onReset: '&'
     },
     controller: ['worksDao', 'searchHelper', function (worksDao, searchHelper) {
 
@@ -29,6 +31,8 @@ angular
 
         this.reset = function () {
             this.filters = [];
+            this.phraseFilter = '';
+            this.onReset();
         };
     }]
 });
