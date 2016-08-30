@@ -7,7 +7,18 @@ angular
     bindings: {
         filters: '='
     },
-    controller: [function () {
+    controller: ['worksDao', 'searchHelper', function (worksDao, searchHelper) {
+
+        this.statusMessage = 'Préparation de l\'index de recherche...';
+
+        worksDao.getWorks()
+            .then(function (works) {
+                return searchHelper.createImitationsIndex(works);
+            })
+            .then((function () {
+                this.statusMessage = '';
+            }).bind(this));
+
         this.deleteFilter = function (index) {
             this.filters.splice(index, 1);
         };

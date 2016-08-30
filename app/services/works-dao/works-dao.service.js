@@ -1,22 +1,21 @@
 'use strict';
 
-var low = require('lowdb');
-
 angular
     .module('myApp.worksDao')
-    .factory('worksDao', [function () {
-        return {
-            db: low('/Users/Nate/Downloads/works.json'),
-            getWorks: function () {
-                return this.db.get('works').value();
-            },
+    .factory('worksDao', ['$q', function ($q) {
+        var Datastore = require('nedb');
+        var nedb = new Datastore({
+            filename: '/Users/Nate/Downloads/works.db',
+            autoload: true
+        });
 
-            getImitations: function (martialReference) {
-                return this.db.get('works')
-                    .filter(function (o) {
-                        return o.martialReference === martialReference || o.reference === martialReference;
-                    })
-                    .value();
-            }
+        return {
+            getWorks: function () {
+                return $q(function (resolve) {
+                    nedb.find({}, function (err, docs) {
+                        resolve(docs);
+                    });
+                });
+            },
         };
     }]);

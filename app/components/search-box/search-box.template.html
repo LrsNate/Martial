@@ -1,16 +1,17 @@
 <h3>Recherche:
-    <button type="button"
+    <a type="button"
             class="btn btn-sm btn-success"
             ng-click="$ctrl.addFilter()">
         <span class="glyphicon glyphicon-plus"></span>
         Filtre
-    </button>
-    <button type="button"
+    </a>
+    <a type="button"
             class="btn btn-sm btn-default"
             ng-click="$ctrl.reset()">
         <span class="glyphicon glyphicon-refresh"></span>
         Réinitialiser
-    </button>
+    </a>
+    <span ng-bind="$ctrl.statusMessage"></span>
 </h3>
 
 <div ng-repeat="filter in $ctrl.filters">

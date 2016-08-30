@@ -10,11 +10,18 @@ angular
     }])
 
     .component('search', {
-        templateUrl: 'search/search.template.html',
-        controller: ['worksDao', function (worksDao) {
+        controller: ['worksDao', 'searchHelper', function (worksDao, searchHelper) {
 
-            this.fullWorks = worksDao.getWorks();
-            this.works = this.fullWorks;
+            this.fullWorks = [];
+            this.works = [];
+            this.filters = [];
+            this.statusMessage = '';
+            this.selectedWork = null;
+
+            worksDao.getWorks().then((function (works) {
+                this.fullWorks = works;
+                this.works = works;
+            }).bind(this));
 
             this.setSelectedWork = function (work) {
                 this.selectedWork = work;
@@ -24,11 +31,11 @@ angular
                 this.filters = [
                     {field: 'work', matcher: 'imitates', term: work.reference}
                 ];
+                searchHelper.applyFilters(this.filters, this.fullWorks)
+                    .then((function (works) {
+                        this.works = works;
+                    }).bind(this));
             };
-
-            this.filters = [];
-            this.works = worksDao.getWorks();
-
-            this.selectedWork = this.works[0];
-        }]
+        }],
+        templateUrl: 'search/search.template.html'
     });

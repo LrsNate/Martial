@@ -1,10 +1,15 @@
 <div class="text-display-header container-fluid" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
-    <div  class="text-display-caret">
+    <div class="text-display-caret">
         <span class="glyphicon"
               ng-class="{'glyphicon-chevron-down': !$ctrl.isCollapsed, 'glyphicon-chevron-up': $ctrl.isCollapsed}">
         </span>
     </div>
-    <p><strong>{{ $ctrl.work.author }}</strong> - {{ $ctrl.work.reference }}</p>
+    <p class="text-display-reference">
+        <strong>{{ $ctrl.work.author }}</strong> - {{ $ctrl.work.reference }}
+    </p>
+    <div class="text-display-caret" ng-click="$ctrl.onDelete()">
+        <span class="glyphicon glyphicon-remove"></span>
+    </div>
 </div>
 <div class="text-display container-fluid" uib-collapse="$ctrl.isCollapsed">
     <div class="row">

@@ -1,5 +1,7 @@
 <div class="container-fluid">
-    <search-box filters="$ctrl.filters"></search-box>
+    <search-box filters="$ctrl.filters">
+        <span ng-bind="$ctrl.statusMessage"></span>
+    </search-box>
 
     <hr/>
 
@@ -13,15 +15,20 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="work in $ctrl.works" ng-click="$ctrl.setSelectedWork(work)">
-            <td>{{ work.author }}</td>
-            <td>{{ work.reference }}</td>
-            <td>{{ work.latinText || work.frenchText | limitTo: 50 }}...</td>
-            <td><button type="button" ng-click="$ctrl.filterByReference(work)"
-                        class="btn btn-sm btn-default">Imitations</button></td>
+        <tr ng-repeat="work in $ctrl.works">
+            <td ng-click="$ctrl.setSelectedWork(work)" ng-bind="work.author"></td>
+            <td ng-click="$ctrl.setSelectedWork(work)" ng-bind="work.reference"></td>
+            <td ng-click="$ctrl.setSelectedWork(work)">{{ work.latinText || work.frenchText | limitTo: 50 }}...</td>
+            <td><a type="button"
+                   ng-click="$ctrl.filterByReference(work)"
+                   ng-if="work.author === 'Martial'"
+                   class="btn btn-sm btn-default">Imitations</a></td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<text-display work="$ctrl.selectedWork"></text-display>
+<text-display ng-if="$ctrl.selectedWork"
+              work="$ctrl.selectedWork"
+              on-delete="$ctrl.selectedWork = null">
+</text-display>
