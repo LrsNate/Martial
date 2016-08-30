@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <search-box filters="$ctrl.filters" on-reset="$ctrl.resetFilters()" phrase-filter="$ctrl.phraseFilter">
+    <search-box filters="$ctrl.filters" on-update="$ctrl.refreshFilters()" phrase-filter="$ctrl.phraseFilter">
         <span ng-bind="$ctrl.statusMessage"></span>
     </search-box>
 

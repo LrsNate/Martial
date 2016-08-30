@@ -5,6 +5,30 @@ angular
     .factory('searchHelper', ['$q', '$timeout', function ($q, $timeout) {
         var imitations = null;
 
+        var matchers = {
+            'author': {
+                'is': function (work, term) {
+                    return work.author === term;
+                },
+                'is_not': function (work, term) {
+                    return work.author !== term;
+                }
+            },
+            'date_published': {
+                'after': function (work, term) {
+                    return work.date >= parseInt(term);
+                },
+                'before': function (work, term) {
+                    return work.date <= parseInt(term);
+                }
+            },
+            'work': {
+                'imitates': function (work, term) {
+                    return true; // already filtered
+                }
+            }
+        };
+
         return {
             createImitationsIndex: function (fullWorks) {
                 return $q(function (resolve) {
@@ -30,14 +54,19 @@ angular
             applyFilters: function (filters, fullWorks) {
                 return $q(function (resolve, reject) {
                     if (!imitations) {
-                        console.log('reject');
                         reject();
                     }
                     $timeout(function () {
                         var works = fullWorks;
+                        /*jshint loopfunc: true */
                         for (var i = 0; i < filters.length; i++) {
-                            if (filters[i].matcher !== 'imitates') continue;
-                            works = imitations[filters[i].term];
+                            if (filters[i].matcher === 'imitates') {
+                                works = imitations[filters[i].term];
+                            } else if (filters[i].term !== '') {
+                                works = _.filter(works, function (work) {
+                                    return matchers[filters[i].field][filters[i].matcher](work, filters[i].term);
+                                });
+                            }
                         }
                         resolve(works);
                     });

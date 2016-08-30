@@ -15,7 +15,10 @@
 </h3>
 
 <div ng-repeat="filter in $ctrl.filters">
-    <search-filter filter="filter" on-delete="$ctrl.deleteFilter($index)"></search-filter>
+    <search-filter filter="filter"
+                   on-update="$ctrl.onUpdate()"
+                   on-delete="$ctrl.deleteFilter($index)">
+    </search-filter>
 </div>
 
 <input class="form-control keyword-filter" ng-model="$ctrl.phraseFilter" placeholder="Rechercher par mot-clé"/>

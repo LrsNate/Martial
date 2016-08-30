@@ -17,7 +17,9 @@
         </select>
     </div>
     <div class="col-sm-8 filter-cell-right">
-        <input class="form-control input-sm" ng-model="$ctrl.filter.term"
+        <input class="form-control input-sm"
+               ng-model="$ctrl.filter.term"
+               ng-change="$ctrl.onUpdate()"
                placeholder="Terme à rechercher" />
         <a type="button" class="btn btn-sm btn-danger" ng-click="$ctrl.onDelete()">
             <span class="glyphicon glyphicon-remove"></span>

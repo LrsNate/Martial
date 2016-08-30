@@ -33,15 +33,15 @@ angular
                 this.filters = [
                     {field: 'work', matcher: 'imitates', term: work.reference}
                 ];
+                this.refreshFilters();
+            };
+
+            this.refreshFilters = function () {
                 searchHelper.applyFilters(this.filters, this.fullWorks)
                     .then((function (works) {
                         this.works = works;
                     }).bind(this));
             };
-
-            this.resetFilters = function () {
-                this.works = this.fullWorks;
-            }
         }],
         templateUrl: 'search/search.template.html'
     });

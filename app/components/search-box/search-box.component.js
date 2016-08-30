@@ -7,7 +7,7 @@ angular
     bindings: {
         filters: '=',
         phraseFilter: '=',
-        onReset: '&'
+        onUpdate: '&'
     },
     controller: ['worksDao', 'searchHelper', function (worksDao, searchHelper) {
 
@@ -23,6 +23,7 @@ angular
 
         this.deleteFilter = function (index) {
             this.filters.splice(index, 1);
+            this.onUpdate();
         };
 
         this.addFilter = function () {
@@ -32,7 +33,7 @@ angular
         this.reset = function () {
             this.filters = [];
             this.phraseFilter = '';
-            this.onReset();
+            this.onUpdate();
         };
     }]
 });
