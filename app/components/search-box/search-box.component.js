@@ -9,7 +9,7 @@ angular
         phraseFilter: '=',
         onUpdate: '&'
     },
-    controller: ['worksDao', 'searchHelper', function (worksDao, searchHelper) {
+    controller: ['$timeout', 'worksDao', 'searchHelper', function ($timeout, worksDao, searchHelper) {
 
         this.statusMessage = 'Préparation de l\'index de recherche...';
 
@@ -33,7 +33,9 @@ angular
         this.reset = function () {
             this.filters = [];
             this.phraseFilter = '';
-            this.onUpdate();
+            $timeout((function () {
+                this.onUpdate();
+            }).bind(this));
         };
     }]
 });
