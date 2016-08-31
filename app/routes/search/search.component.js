@@ -1,7 +1,6 @@
 'use strict';
 
-angular
-    .module('myApp.search')
+angular.module('myApp.search')
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/search', {
@@ -43,5 +42,5 @@ angular
                     }).bind(this));
             };
         }],
-        templateUrl: 'search/search.template.html'
+        templateUrl: 'routes/search/search.template.html'
     });

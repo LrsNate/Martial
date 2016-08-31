@@ -5,10 +5,11 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'ui.bootstrap',
+    'myApp.boot',
     'myApp.search',
     'myApp.version'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
-    $routeProvider.otherwise({redirectTo: '/search'});
+    $routeProvider.otherwise({redirectTo: '/boot'});
 }]);
