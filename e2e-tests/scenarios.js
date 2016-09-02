@@ -5,9 +5,9 @@
 describe('my app', function() {
 
 
-  it('should automatically redirect to /search when location hash/fragment is empty', function() {
+  it('should automatically redirect to /boot when location hash/fragment is empty', function() {
     browser.get('index.html');
-    expect(browser.getLocationAbsUrl()).toMatch("/search");
+    expect(browser.getLocationAbsUrl()).toMatch("/boot");
   });
 
 
