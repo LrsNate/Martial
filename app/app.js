@@ -5,6 +5,7 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'ui.bootstrap',
+    'angular-filters',
     'myApp.boot',
     'myApp.search',
     'myApp.version'

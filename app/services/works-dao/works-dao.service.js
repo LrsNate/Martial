@@ -2,10 +2,10 @@
 
 angular
     .module('myApp.worksDao')
-    .factory('worksDao', ['$q', function ($q) {
+    .factory('worksDao', ['$q', 'fileHelper', function ($q, fileHelper) {
         var Datastore = require('nedb');
         var nedb = new Datastore({
-            filename: '/Users/Nate/Downloads/works.db',
+            filename: fileHelper.getFilePath('works.db'),
             autoload: true
         });
 

@@ -34,7 +34,8 @@
     "dist": "build"
   },
   "dependencies": {
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "osenv": "^0.1.3"
   },
   "build": {
     "appId": "fr.nate.martial",

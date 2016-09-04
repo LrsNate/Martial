@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('myApp.worksDao', []);
+angular.module('myApp.worksDao', ['myApp.fileHelper']);

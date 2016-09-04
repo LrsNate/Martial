@@ -1,1 +1,18 @@
-<h1>Démarrage de l'application</h1>
+<div class="container">
+    <h1>Démarrage de l'application</h1>
+
+    <ul>
+        <li ng-repeat="message in $ctrl.messages" ng-bind="message"></li>
+    </ul>
+    <div ng-if="$ctrl.showProgress">
+        <p>Avancement: {{ $ctrl.achieved.achieved | bytes }}/{{ $ctrl.achieved.total | bytes }}</p>
+        <uib-progressbar value="$ctrl.achieved.percentage" ng-if="$ctrl.showProgress">
+            <strong>{{$ctrl.achieved.percentage}}%</strong>
+        </uib-progressbar>
+    </div>
+
+    <div ng-if="$ctrl.isReady">
+        <a href="#!/search" type="button" class="btn btn-success">Démarrer maintenant</a>
+    </div>
+
+</div>

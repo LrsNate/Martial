@@ -17,9 +17,9 @@ angular
             .then(function (works) {
                 return searchHelper.createImitationsIndex(works);
             })
-            .then((function () {
+            .then(function () {
                 this.statusMessage = '';
-            }).bind(this));
+            }.bind(this));
 
         this.deleteFilter = function (index) {
             this.filters.splice(index, 1);
@@ -33,9 +33,9 @@ angular
         this.reset = function () {
             this.filters = [];
             this.phraseFilter = '';
-            $timeout((function () {
+            $timeout(function () {
                 this.onUpdate();
-            }).bind(this));
+            }.bind(this));
         };
     }]
 });

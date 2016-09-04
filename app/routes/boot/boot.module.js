@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('myApp.boot', []);
+angular.module('myApp.boot', ['myApp.fileHelper']);
