@@ -29,9 +29,10 @@ angular.module('myApp.fileHelper')
             },
 
             downloadFile: function (fileUrl, progress) {
-                return $q(function (resolve) {
+                return $q(function (resolve, reject) {
                     var filename = path.basename(fileUrl);
-                    var fileHandle = fs.createWriteStream(this.getFilePath(filename));
+                    var filePath = this.getFilePath(filename);
+                    var fileHandle = fs.createWriteStream(filePath);
 
 
                     http.get(fileUrl, function (response) {
@@ -48,6 +49,9 @@ angular.module('myApp.fileHelper')
                             fileHandle.end();
                             resolve();
                         });
+
+                    }).on('error', function () {
+                        fs.unlink(filePath, reject);
                     });
                 }.bind(this));
             }

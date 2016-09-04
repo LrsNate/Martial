@@ -11,6 +11,12 @@
         </uib-progressbar>
     </div>
 
+    <div ng-if="$ctrl.hasErrored">
+        <div class="alert alert-danger">
+            L'application n'est pas en mesure de démarrer normalement.
+        </div>
+    </div>
+
     <div ng-if="$ctrl.isReady">
         <a href="#!/search" type="button" class="btn btn-success">Démarrer maintenant</a>
     </div>

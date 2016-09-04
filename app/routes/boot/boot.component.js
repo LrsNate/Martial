@@ -14,9 +14,8 @@ angular
 
             this.isReady = false;
             this.showProgress = false;
-
+            this.hasErrored = false;
             this.messages = ['Vérification de la base de données...'];
-
             this.achieved = {percentage: 0, achieved: 0, total: 0};
 
             fileHelper.fileExists('works.db').then(function (exists) {
@@ -40,11 +39,15 @@ angular
                         this.achieved.total = total;
                         $scope.$digest();
                     }.bind(this)
-                ).then((function () {
+                ).then(function () {
                     this.showProgress = false;
                     this.messages.push('Téléchargement terminé.');
                     this.isReady = true;
-                }).bind(this));
+                }.bind(this), function () {
+                    this.messages.push('Échec du téléchargement.');
+                    this.showProgress = false;
+                    this.hasErrored = true;
+                }.bind(this));
             }.bind(this);
 
             var start = function () {

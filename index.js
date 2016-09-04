@@ -5,6 +5,18 @@ var app = electron.app;
 // Module to create native browser window.
 var BrowserWindow = electron.BrowserWindow;
 
+var autoUpdater = electron.autoUpdater;
+var appVersion = require('./package.json').version;
+var os = require('os').platform();
+
+// var updateFeed = 'http://localhost:3000/updates/latest';
+//
+// if (process.env.NODE_ENV !== 'development') {
+//     updateFeed = 'https://martial-releases.herokuapp.com/updates/latest';
+// }
+//
+// autoUpdater.setFeedURL(updateFeed + '?v=' + appVersion);
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow;
