@@ -23,7 +23,7 @@ angular
                 if (exists) {
                     this.messages.push('Une base de données existe déjà.');
                     this.isReady = true;
-                    start();
+                    $location.path('/search');
                 } else {
                     downloadDatabase();
                 }
@@ -43,6 +43,7 @@ angular
                     this.showProgress = false;
                     this.messages.push('Téléchargement terminé.');
                     this.isReady = true;
+                    start();
                 }.bind(this), function () {
                     this.messages.push('Échec du téléchargement.');
                     this.showProgress = false;
@@ -51,10 +52,10 @@ angular
             }.bind(this);
 
             var start = function () {
-                this.messages.push('Démarrage de l\'application...');
+                this.messages.push('Démarrage de l\'application dans 3 secondes...');
                 $timeout(function () {
-                    $location.path('search');
-                }, 4000);
+                    $location.path('/search');
+                }, 3000);
             }.bind(this);
         }],
         templateUrl: 'routes/boot/boot.template.html'
