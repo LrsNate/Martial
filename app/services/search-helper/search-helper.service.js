@@ -22,11 +22,6 @@ angular
                     return work.date <= parseInt(term);
                 }
             },
-            'work': {
-                'imitates': function (work, term) {
-                    return true; // already filtered
-                }
-            }
         };
 
         return {
@@ -60,9 +55,12 @@ angular
                         var works = fullWorks;
                         /*jshint loopfunc: true */
                         for (var i = 0; i < filters.length; i++) {
+                            if (!filters[i].term || !filters[i].matcher) {
+                                continue;
+                            }
                             if (filters[i].matcher.id === 'imitates') {
                                 works = imitations[filters[i].term];
-                            } else if (!!filters[i].term) {
+                            } else {
                                 works = _.filter(works, function (work) {
                                     return matchers[filters[i].field.id][filters[i].matcher.id](work, filters[i].term);
                                 });
