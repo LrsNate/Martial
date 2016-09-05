@@ -1,3 +1,5 @@
 'use strict';
 
-angular.module('myApp.textDisplay', []);
+angular.module('myApp.textDisplay', [
+    'ui.bootstrap'
+]);

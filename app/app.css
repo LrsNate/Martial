@@ -55,6 +55,10 @@
     text-align: center;
 }
 
+.flex-fill {
+    flex-grow: 1;
+}
+
 text-display {
     box-shadow: 10px 10px 5px #888888;
     position: fixed;

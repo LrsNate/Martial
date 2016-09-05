@@ -1,5 +1,6 @@
 {
   "strict": "global",
+  "esversion": 6,
   "globals": {
     "angular": false,
 
@@ -20,6 +21,6 @@
     "require": false,
     "__dirname": false,
     "process": false,
-    "async": false
+    "_": false
   }
 }

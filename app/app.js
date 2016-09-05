@@ -4,7 +4,7 @@
 angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
-    'ui.bootstrap',
+     'ngSanitize',
     'angular-filters',
     'myApp.boot',
     'myApp.search',

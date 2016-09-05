@@ -1,27 +1,36 @@
 <div class="row filter-row">
     <div class="col-sm-2 filter-cell-left">
-        <select class="form-control input-sm"
-                ng-model="$ctrl.filter.field">
-            <option value="" disabled>Champ</option>
-            <option ng-repeat="field in $ctrl.fields" value="{{ field.id }}">{{ field.name }}</option>
-        </select>
+        <ui-select ng-model="$ctrl.filter.field" theme="bootstrap" on-select="$ctrl.onFieldChange()">
+            <ui-select-match placeholder="Champ">{{ $select.selected.name }}</ui-select-match>
+            <ui-select-choices repeat="value in $ctrl.fields | filter: $select.search">
+                <span ng-bind-html="value.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
     </div>
     <div class="col-sm-2 filter-cell-center">
-        <select class="form-control input-sm"
-                ng-model="$ctrl.filter.matcher">
-            <option value="" disabled>Sélecteur</option>
-            <option ng-repeat="matcher in $ctrl.getMatchers($ctrl.filter.field)"
-                    value="{{ matcher.id }}">
-                {{ matcher.name }}
-            </option>
-        </select>
+        <ui-select ng-model="$ctrl.filter.matcher" theme="bootstrap" on-select="$ctrl.onUpdate()">
+            <ui-select-match placeholder="Sélecteur">{{ $select.selected.name }}</ui-select-match>
+            <ui-select-choices repeat="value in $ctrl.getMatchers() | filter: $select.search">
+                <span ng-bind-html="value.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
     </div>
-    <div class="col-sm-8 filter-cell-right">
-        <input class="form-control input-sm"
-               ng-model="$ctrl.filter.term"
-               ng-change="$ctrl.onUpdate()"
-               placeholder="Terme à rechercher" />
-        <a type="button" class="btn btn-sm btn-danger" ng-click="$ctrl.onDelete()">
+    <div class="col-sm-8 filter-cell-right" ng-switch="$ctrl.filter.field.id">
+        <div class="flex-fill" ng-switch-when="date_published">
+            <input class="form-control"
+                   ng-model="$ctrl.filter.term"
+                   ng-change="$ctrl.onUpdate()"
+                   placeholder="Terme à rechercher" />
+        </div>
+        <div class="flex-fill" ng-switch-default>
+            <ui-select ng-model="$ctrl.filter.term" theme="bootstrap" on-select="$ctrl.onUpdate()">
+                <ui-select-match placeholder="Terme à rechercher">{{ $select.selected }}</ui-select-match>
+                <ui-select-choices repeat="value in $ctrl.values | filter: $select.search">
+                    <span ng-bind-html="value | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <a type="button" class="btn btn-danger" ng-click="$ctrl.onDelete()">
             <span class="glyphicon glyphicon-remove"></span>
         </a>
     </div>

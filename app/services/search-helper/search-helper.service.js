@@ -60,11 +60,11 @@ angular
                         var works = fullWorks;
                         /*jshint loopfunc: true */
                         for (var i = 0; i < filters.length; i++) {
-                            if (filters[i].matcher === 'imitates') {
+                            if (filters[i].matcher.id === 'imitates') {
                                 works = imitations[filters[i].term];
-                            } else if (filters[i].term !== '') {
+                            } else if (!!filters[i].term) {
                                 works = _.filter(works, function (work) {
-                                    return matchers[filters[i].field][filters[i].matcher](work, filters[i].term);
+                                    return matchers[filters[i].field.id][filters[i].matcher.id](work, filters[i].term);
                                 });
                             }
                         }
