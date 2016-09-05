@@ -38,16 +38,13 @@ angular
                 if (field.id === 'author') {
                     worksDao.getAuthors().then(function (authors) {
                         this.values = authors;
-                        console.log(this.values);
                     }.bind(this));
                 } else if (field.id === 'work') {
                     worksDao.getMartialReferences().then(function (authors) {
                         this.values = authors;
-                        console.log(this.values);
                     }.bind(this));
                 } else {
                     this.values = [];
-                    console.log(this.values);
                 }
             }.bind(this);
         }]
