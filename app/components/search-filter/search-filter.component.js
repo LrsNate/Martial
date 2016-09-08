@@ -43,6 +43,10 @@ angular
                     worksDao.getMartialReferences().then(function (authors) {
                         this.values = authors;
                     }.bind(this));
+                } else if (field.id === 'meter') {
+                    worksDao.getMeters().then(function (authors) {
+                        this.values = authors;
+                    }.bind(this));
                 } else {
                     this.values = [];
                 }

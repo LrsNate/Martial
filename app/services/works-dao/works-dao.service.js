@@ -9,6 +9,19 @@ angular
             autoload: true
         });
 
+        var getField = function (fieldName) {
+            return $q(function (resolve) {
+                nedb.find({}, function (err, docs) {
+                    resolve(_(docs)
+                        .map(doc => doc[fieldName])
+                        .sortBy(term => term.toLowerCase())
+                        .sortedUniq()
+                        .value()
+                    );
+                });
+            });
+        };
+
         return {
             getWorks: function () {
                 return $q(function (resolve) {
@@ -18,18 +31,9 @@ angular
                 });
             },
 
-            getAuthors: function () {
-                return $q(function (resolve) {
-                    nedb.find({}, function (err, docs) {
-                        resolve(_(docs)
-                            .map(doc => doc.author)
-                            .sortBy(name => name.toLowerCase())
-                            .sortedUniq()
-                            .value()
-                        );
-                    });
-                });
-            },
+            getAuthors: () => getField('author'),
+
+            getMeters: () => getField('meter'),
 
             getMartialReferences: function () {
                 return $q(function (resolve) {

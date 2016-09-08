@@ -14,6 +14,14 @@ angular
                     return work.author !== term;
                 }
             },
+            'meter': {
+                'is': function (work, term) {
+                    return work.meter === term;
+                },
+                'is_not': function (work, term) {
+                    return work.meter !== term;
+                }
+            },
             'date_published': {
                 'after': function (work, term) {
                     return work.date >= parseInt(term);
