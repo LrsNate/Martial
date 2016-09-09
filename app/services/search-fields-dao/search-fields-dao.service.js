@@ -2,7 +2,7 @@
 
 angular
     .module('myApp.searchFieldsDao')
-    .factory('searchFieldsDao', [function () {
+    .factory('searchFieldsDao', [() => {
         return {
             fields: [
                 {name: 'Auteur', id: 'author', type: 'string'},

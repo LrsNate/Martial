@@ -1,54 +1,58 @@
 'use strict';
 
-angular
-    .module('myApp.worksDao')
-    .factory('worksDao', ['$q', 'fileHelper', function ($q, fileHelper) {
-        var Datastore = require('nedb');
-        var nedb = new Datastore({
+class WorksDao {
+    constructor($q, fileHelper) {
+        this.$q = $q;
+
+        const Datastore = require('nedb');
+        this.nedb = new Datastore({
             filename: fileHelper.getFilePath('works.db'),
             autoload: true
         });
+    }
 
-        return {
-            getWorks: function () {
-                return $q(function (resolve) {
-                    nedb.find({}, function (err, docs) {
-                        resolve(docs);
-                    });
-                });
-            },
+    getWorks() {
+        return this.$q((resolve) => {
+            this.nedb.find({}, (err, docs) => {
+                resolve(docs);
+            });
+        });
+    }
 
-            getField: function (fieldName) {
-                return $q(function (resolve) {
-                    nedb.find({}, function (err, docs) {
-                        resolve(_(docs)
-                            .map(doc => doc[fieldName])
-                            .sortBy(term => term ? term.toLowerCase() : null)
-                            .sortedUniq()
-                            .value()
-                        );
-                    });
-                });
-            },
+    getField(fieldName) {
+        return this.$q((resolve) => {
+            this.nedb.find({}, (err, docs) => {
+                resolve(_(docs)
+                    .map(doc => doc[fieldName])
+                    .sortBy(term => term ? term.toLowerCase() : null)
+                    .sortedUniq()
+                    .value()
+                );
+            });
+        });
+    }
 
-            getMartialWork: function (reference) {
-                return $q(function (resolve) {
-                    nedb.findOne({author: 'Martial', reference: reference}, function (err, doc) {
-                        resolve(doc);
-                    });
-                });
-            },
+    getMartialWork(reference) {
+        return this.$q((resolve) => {
+            this.nedb.findOne({author: 'Martial', reference: reference}, (err, doc) => {
+                resolve(doc);
+            });
+        });
+    }
 
-            getMartialReferences: function () {
-                return $q(function (resolve) {
-                    nedb.find({author: 'Martial'}, function (err, docs) {
-                        resolve(_(docs)
-                            .map(doc => doc.reference)
-                            .sortBy()
-                            .value()
-                        );
-                    });
-                });
-            }
-        };
-    }]);
+    getMartialReferences() {
+        return this.$q((resolve) => {
+            this.nedb.find({author: 'Martial'}, (err, docs) => {
+                resolve(_(docs)
+                    .map(doc => doc.reference)
+                    .sortBy()
+                    .value()
+                );
+            });
+        });
+    }
+}
+
+angular
+    .module('myApp.worksDao')
+    .factory('worksDao', ($q, fileHelper) => new WorksDao($q, fileHelper));

@@ -1,59 +1,67 @@
 'use strict';
 
+class FileHelper {
+
+    constructor ($q) {
+        this.$q = $q;
+        this.fs = require('fs');
+        this.http = require('http');
+        this.path = require('path');
+
+        const osenv = require('osenv');
+        this.home = osenv.home();
+        this.sep = process.platform === 'win32' ? '\\' : '/';
+    }
+
+    static get $inject() {
+        return ['$q'];
+    }
+
+    getDataFolderPath() {
+        return this.home + this.sep + 'Documents' + this.sep + 'Martial';
+    }
+
+    getFilePath(filename) {
+        const folder = this.getDataFolderPath();
+        return folder + this.sep + filename;
+    }
+
+    fileExists(filename) {
+        return this.$q((resolve) => {
+            this.fs.stat(this.getFilePath(filename),(err) => {
+                resolve(!err);
+            });
+        });
+    }
+
+    downloadFile(fileUrl, progress) {
+        return this.$q((resolve, reject) => {
+            const filename = this.path.basename(fileUrl);
+            const filePath = this.getFilePath(filename);
+            const fileHandle = this.fs.createWriteStream(filePath);
+
+
+            this.http.get(fileUrl, function (response) {
+                const total = response.headers['content-length'];
+                let achieved = 0;
+                response.pipe(fileHandle);
+
+                response.on('data', (chunk) => {
+                    achieved += parseInt(chunk.length);
+                    progress(achieved, total);
+                });
+
+                response.on('end', () => {
+                    fileHandle.end();
+                    resolve();
+                });
+
+            }).on('error', () => {
+                this.fs.unlink(filePath, reject);
+            });
+        });
+    }
+}
+
 angular.module('myApp.fileHelper')
-    .factory('fileHelper', ['$q', function ($q) {
-        var fs = require('fs');
-        var http = require('http');
-        var osenv = require('osenv');
-        var path = require('path');
-
-        var sep = process.platform === 'win32' ? '\\' : '/';
-
-        return {
-            getDataFolderPath: function () {
-                var home = osenv.home();
-                return home + sep + 'Documents' + sep + 'Martial';
-            },
-
-            getFilePath: function (filename) {
-                var folder = this.getDataFolderPath();
-                return folder + sep + filename;
-            },
-
-            fileExists: function (filename) {
-                return $q(function (resolve) {
-                    fs.stat(this.getFilePath(filename), function (err) {
-                        resolve(!err);
-                    });
-                }.bind(this));
-            },
-
-            downloadFile: function (fileUrl, progress) {
-                return $q(function (resolve, reject) {
-                    var filename = path.basename(fileUrl);
-                    var filePath = this.getFilePath(filename);
-                    var fileHandle = fs.createWriteStream(filePath);
-
-
-                    http.get(fileUrl, function (response) {
-                        var total = response.headers['content-length'];
-                        var achieved = 0;
-                        response.pipe(fileHandle);
-
-                        response.on('data', function (chunk) {
-                            achieved += parseInt(chunk.length);
-                            progress(achieved, total);
-                        });
-
-                        response.on('end', function () {
-                            fileHandle.end();
-                            resolve();
-                        });
-
-                    }).on('error', function () {
-                        fs.unlink(filePath, reject);
-                    });
-                }.bind(this));
-            }
-        };
-    }]);
+    .factory('fileHelper', ($q) => new FileHelper($q));

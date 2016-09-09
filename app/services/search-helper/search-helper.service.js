@@ -1,76 +1,79 @@
 'use strict';
 
-angular
-    .module('myApp.searchHelper')
-    .factory('searchHelper', ['$q', '$timeout', function ($q, $timeout) {
-        var imitations = null;
+class SearchHelper {
 
-        var matchers = {
-            'string': {
-                'is': function (work, field, term) {
+    constructor($q, $timeout) {
+        this.$q = $q;
+        this.$timeout = $timeout;
+        this.imitations = null;
+
+        this.matchers = {
+            string: {
+                is(work, field, term) {
                     return work[field] === term;
                 },
-                'is_not': function (work, field, term) {
+                is_not(work, field, term) {
                     return work[field] !== term;
                 }
             },
-            'date': {
-                'after': function (work, field, term) {
+            date: {
+                after(work, field, term) {
                     return work[field] >= parseInt(term);
                 },
-                'before': function (work, field, term) {
+                before(work, field, term) {
                     return work[field] <= parseInt(term);
                 }
             },
         };
+    }
 
-        return {
-            createImitationsIndex: function (fullWorks) {
-                return $q(function (resolve) {
-                    if (imitations) {
-                        resolve();
+    createImitationsIndex(fullWorks) {
+        return this.$q((resolve) => {
+            if (this.imitations) resolve();
+
+            this.$timeout(() => {
+                this.imitations = {};
+
+                for (var i = 0; i < fullWorks.length; i++) {
+                    var martialReference = fullWorks[i].martialReference || fullWorks[i].reference;
+                    if (this.imitations.hasOwnProperty(martialReference)) {
+                        this.imitations[martialReference].push(fullWorks[i]);
+                    } else {
+                        this.imitations[martialReference] = [fullWorks[i]];
                     }
-                    $timeout(function () {
-                        imitations = {};
+                }
+                resolve();
+            });
+        });
+    }
 
-                        for (var i = 0; i < fullWorks.length; i++) {
-                            var martialReference = fullWorks[i].martialReference || fullWorks[i].reference;
-                            if (imitations.hasOwnProperty(martialReference)) {
-                                imitations[martialReference].push(fullWorks[i]);
-                            } else {
-                                imitations[martialReference] = [fullWorks[i]];
-                            }
-                        }
-                        resolve();
-                    });
-                });
-            },
-
-            applyFilters: function (filters, fullWorks) {
-                return $q(function (resolve, reject) {
-                    if (!imitations) {
-                        reject();
+    applyFilters(filters, fullWorks) {
+        return this.$q((resolve, reject) => {
+            if (!this.imitations) {
+                reject();
+            }
+            this.$timeout(() => {
+                var works = fullWorks;
+                /*jshint loopfunc: true */
+                for (var i = 0; i < filters.length; i++) {
+                    if (!filters[i].term || !filters[i].matcher) {
+                        continue;
                     }
-                    $timeout(function () {
-                        var works = fullWorks;
-                        /*jshint loopfunc: true */
-                        for (var i = 0; i < filters.length; i++) {
-                            if (!filters[i].term || !filters[i].matcher) {
-                                continue;
-                            }
-                            if (filters[i].matcher.id === 'imitates') {
-                                works = imitations[filters[i].term];
-                            } else {
-                                works = _.filter(works, function (work) {
-                                    var filter = matchers[filters[i].field.type][filters[i].matcher.id];
-                                    return filter(work, filters[i].field.id, filters[i].term);
-                                });
-                            }
-                        }
-                        resolve(works);
-                    });
-                });
+                    if (filters[i].matcher.id === 'imitates') {
+                        works = this.imitations[filters[i].term];
+                    } else {
+                        works = _.filter(works, (work) => {
+                            var filter = this.matchers[filters[i].field.type][filters[i].matcher.id];
+                            return filter(work, filters[i].field.id, filters[i].term);
+                        });
+                    }
+                }
+                resolve(works);
+            });
+        });
+    }
+}
 
-            },
-        };
-    }]);
+angular
+    .module('myApp.searchHelper')
+    .factory('searchHelper', ($q, $timeout) => new SearchHelper($q, $timeout));
