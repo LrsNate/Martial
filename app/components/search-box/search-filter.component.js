@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-    .module('myApp.searchFilter')
+    .module('myApp.searchBox')
     .component('searchFilter', {
-        templateUrl: 'components/search-filter/search-filter.template.html',
+        templateUrl: 'components/search-box/search-filter.template.html',
         bindings: {
             filter: '=',
             onUpdate: '&',
@@ -16,36 +16,36 @@ angular
 
             this.values = [];
 
-            this.isSeletableField = function () {
+            this.isSeletableField = () => {
                 return this.filter.field && this.filter.field.id === 'date_published';
             };
 
-            this.getMatchers = function () {
+            this.getMatchers = () => {
                 var field = this.filter.field;
                 if (!field) return [];
 
                 return _.filter(this.matchers, {type: field.type});
-            }.bind(this);
+            };
 
-            this.onFieldChange = function () {
+            this.onFieldChange = () => {
                 delete this.filter.matcher;
                 delete this.filter.term;
                 this.updateValues();
             };
 
-            this.updateValues = function () {
+            this.updateValues = () => {
                 var field = this.filter.field;
                 if (field.id === 'work') {
-                    worksDao.getMartialReferences().then(function (values) {
+                    worksDao.getMartialReferences().then((values) => {
                         this.values = values;
-                    }.bind(this));
+                    });
                 } else if (field.id) {
-                    worksDao.getField(field.id).then(function (values) {
+                    worksDao.getField(field.id).then((values) => {
                         this.values = values;
-                    }.bind(this));
+                    });
                 } else {
                     this.values = [];
                 }
-            }.bind(this);
+            };
         }]
     });

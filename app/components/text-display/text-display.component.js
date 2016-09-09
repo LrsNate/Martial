@@ -12,17 +12,16 @@ angular
             this.isCollapsed = true;
             this.referencedWork = null;
 
-            var init = function () {
+            var init = () => {
                 if (this.work.author === 'Martial') {
                     this.referencedWork = null;
                 } else {
-                    worksDao.getMartialWork(this.work.martialReference).then(function (doc) {
+                    worksDao.getMartialWork(this.work.martialReference).then((doc) => {
                         this.referencedWork = doc;
-                        console.log(doc);
-                    }.bind(this));
+                    });
                 }
                 this.isCollapsed = false;
-            }.bind(this);
+            };
 
             $scope.$watch(() => this.work, init);
         }]

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('myApp.searchBox', [
-    'myApp.searchFilter',
+    'ui.select',
     'myApp.worksDao',
-    'myApp.searchHelper'
+    'myApp.searchHelper',
+    'myApp.searchFieldsDao'
 ]);

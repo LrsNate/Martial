@@ -14,28 +14,28 @@ angular
         this.statusMessage = 'Préparation de l\'index de recherche...';
 
         worksDao.getWorks()
-            .then(function (works) {
+            .then((works) => {
                 return searchHelper.createImitationsIndex(works);
             })
-            .then(function () {
+            .then(() => {
                 this.statusMessage = '';
-            }.bind(this));
+            });
 
-        this.deleteFilter = function (index) {
+        this.deleteFilter = (index) => {
             this.filters.splice(index, 1);
             this.onUpdate();
         };
 
-        this.addFilter = function () {
+        this.addFilter = () => {
             this.filters.push({});
         };
 
-        this.reset = function () {
+        this.reset = () => {
             this.filters = [];
             this.phraseFilter = '';
-            $timeout(function () {
+            $timeout(() => {
                 this.onUpdate();
-            }.bind(this));
+            });
         };
     }]
 });
