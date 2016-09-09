@@ -30,7 +30,11 @@ angular.module('myApp.search')
 
             this.filterByReference = function (work) {
                 this.filters = [
-                    {field: 'work', matcher: 'imitates', term: work.reference}
+                    {
+                        field: {name: 'Oeuvre', id: 'work', type: 'work'},
+                        matcher: {name: 'imite', id: 'imitates', type: 'work'},
+                        term: work.reference
+                    }
                 ];
                 this.refreshFilters();
             };

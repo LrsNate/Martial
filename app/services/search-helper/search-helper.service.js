@@ -6,28 +6,20 @@ angular
         var imitations = null;
 
         var matchers = {
-            'author': {
-                'is': function (work, term) {
-                    return work.author === term;
+            'string': {
+                'is': function (work, field, term) {
+                    return work[field] === term;
                 },
-                'is_not': function (work, term) {
-                    return work.author !== term;
+                'is_not': function (work, field, term) {
+                    return work[field] !== term;
                 }
             },
-            'meter': {
-                'is': function (work, term) {
-                    return work.meter === term;
+            'date': {
+                'after': function (work, field, term) {
+                    return work[field] >= parseInt(term);
                 },
-                'is_not': function (work, term) {
-                    return work.meter !== term;
-                }
-            },
-            'date_published': {
-                'after': function (work, term) {
-                    return work.date >= parseInt(term);
-                },
-                'before': function (work, term) {
-                    return work.date <= parseInt(term);
+                'before': function (work, field, term) {
+                    return work[field] <= parseInt(term);
                 }
             },
         };
@@ -70,7 +62,8 @@ angular
                                 works = imitations[filters[i].term];
                             } else {
                                 works = _.filter(works, function (work) {
-                                    return matchers[filters[i].field.id][filters[i].matcher.id](work, filters[i].term);
+                                    var filter = matchers[filters[i].field.type][filters[i].matcher.id];
+                                    return filter(work, filters[i].field.id, filters[i].term);
                                 });
                             }
                         }

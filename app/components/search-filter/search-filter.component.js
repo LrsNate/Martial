@@ -35,17 +35,13 @@ angular
 
             this.updateValues = function () {
                 var field = this.filter.field;
-                if (field.id === 'author') {
-                    worksDao.getAuthors().then(function (authors) {
-                        this.values = authors;
+                if (field.id === 'work') {
+                    worksDao.getMartialReferences().then(function (values) {
+                        this.values = values;
                     }.bind(this));
-                } else if (field.id === 'work') {
-                    worksDao.getMartialReferences().then(function (authors) {
-                        this.values = authors;
-                    }.bind(this));
-                } else if (field.id === 'meter') {
-                    worksDao.getMeters().then(function (authors) {
-                        this.values = authors;
+                } else if (field.id) {
+                    worksDao.getField(field.id).then(function (values) {
+                        this.values = values;
                     }.bind(this));
                 } else {
                     this.values = [];

@@ -8,6 +8,7 @@ angular
                 {name: 'Auteur', id: 'author', type: 'string'},
                 {name: 'Publication', id: 'date_published', type: 'date'},
                 {name: 'Mètre', id: 'meter', type: 'string'},
+                {name: 'Strophe', id: 'stanza', type: 'string'},
                 {name: 'Oeuvre', id: 'work', type: 'work'}
             ],
             matchers: [

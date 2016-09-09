@@ -9,19 +9,6 @@ angular
             autoload: true
         });
 
-        var getField = function (fieldName) {
-            return $q(function (resolve) {
-                nedb.find({}, function (err, docs) {
-                    resolve(_(docs)
-                        .map(doc => doc[fieldName])
-                        .sortBy(term => term.toLowerCase())
-                        .sortedUniq()
-                        .value()
-                    );
-                });
-            });
-        };
-
         return {
             getWorks: function () {
                 return $q(function (resolve) {
@@ -31,9 +18,26 @@ angular
                 });
             },
 
-            getAuthors: () => getField('author'),
+            getField: function (fieldName) {
+                return $q(function (resolve) {
+                    nedb.find({}, function (err, docs) {
+                        resolve(_(docs)
+                            .map(doc => doc[fieldName])
+                            .sortBy(term => term ? term.toLowerCase() : null)
+                            .sortedUniq()
+                            .value()
+                        );
+                    });
+                });
+            },
 
-            getMeters: () => getField('meter'),
+            getMartialWork: function (reference) {
+                return $q(function (resolve) {
+                    nedb.findOne({author: 'Martial', reference: reference}, function (err, doc) {
+                        resolve(doc);
+                    });
+                });
+            },
 
             getMartialReferences: function () {
                 return $q(function (resolve) {

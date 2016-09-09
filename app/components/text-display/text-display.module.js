@@ -1,5 +1,6 @@
 'use strict';
 
 angular.module('myApp.textDisplay', [
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'myApp.worksDao'
 ]);
