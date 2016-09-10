@@ -18,17 +18,15 @@ angular.module('myApp.search')
             this.statusMessage = 'Chargement des épigrammes...';
             this.selectedWork = null;
 
-            worksDao.getWorks().then(function (works) {
+            worksDao.getWorks().then((works) => {
                 this.fullWorks = works;
                 this.works = works;
                 this.statusMessage = 'Aucune épigramme n\'a pu être trouvée avec ces critères';
-            }.bind(this));
+            });
 
-            this.setSelectedWork = function (work) {
-                this.selectedWork = work;
-            };
+            this.setSelectedWork = (work) => this.selectedWork = work;
 
-            this.filterByReference = function (work) {
+            this.filterByReference = (work) => {
                 this.filters = [
                     {
                         field: {name: 'Oeuvre', id: 'work', type: 'work'},
@@ -39,11 +37,9 @@ angular.module('myApp.search')
                 this.refreshFilters();
             };
 
-            this.refreshFilters = function () {
+            this.refreshFilters = () => {
                 searchHelper.applyFilters(this.filters, this.fullWorks)
-                    .then(function (works) {
-                        this.works = works;
-                    }.bind(this));
+                    .then((works) => this.works = works);
             };
         }],
         templateUrl: 'routes/search/search.template.html'
