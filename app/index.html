@@ -11,9 +11,14 @@
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
+
+<navigation-bar></navigation-bar>
+
 <div ng-view></div>
 
-<div>Martial app: v<span app-version></span></div>
+<footer>
+    <p>Martial app: v<span app-version></span></p>
+</footer>
 
 <script>
     window.jQuery = window.$ = require('./bower_components/jquery/dist/jquery.js');
@@ -46,14 +51,16 @@
 <script src="services/works-dao/works-dao.module.js"></script>
 <script src="services/works-dao/works-dao.service.js"></script>
 
-<script src="components/version/version.module.js"></script>
-<script src="components/version/version.directive.js"></script>
-<script src="components/version/interpolate.filter.js"></script>
+<script src="components/navigation-bar/navigation-bar.module.js"></script>
+<script src="components/navigation-bar/navigation-bar.component.js"></script>
 <script src="components/search-box/search-box.module.js"></script>
 <script src="components/search-box/search-box.component.js"></script>
 <script src="components/search-box/search-filter.component.js"></script>
 <script src="components/text-display/text-display.module.js"></script>
 <script src="components/text-display/text-display.component.js"></script>
+<script src="components/version/version.module.js"></script>
+<script src="components/version/version.directive.js"></script>
+<script src="components/version/interpolate.filter.js"></script>
 
 </body>
 </html>

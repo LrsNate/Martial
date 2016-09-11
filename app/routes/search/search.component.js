@@ -34,6 +34,7 @@ angular.module('myApp.search')
                         term: work.reference
                     }
                 ];
+                this.phraseFilter = '';
                 this.refreshFilters();
             };
 

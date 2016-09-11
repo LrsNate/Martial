@@ -67,3 +67,12 @@ text-display {
     background: white;
     overflow: scroll;
 }
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    padding-left: 60px;
+    width: 100%;
+    background-color: #f5f5f5;
+    color: #777777;
+}

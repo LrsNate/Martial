@@ -7,8 +7,9 @@ angular.module('myApp', [
      'ngSanitize',
     'angular-filters',
     'myApp.boot',
+    'myApp.navigationBar',
     'myApp.search',
-    'myApp.version'
+    'myApp.version',
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
