@@ -28,7 +28,7 @@ angular
                 }
             });
 
-            var downloadDatabase = () => {
+            const downloadDatabase = () => {
                 this.messages.push('Aucune base de données n\'a pu être trouvée. Téléchargement en cours...');
                 this.showProgress = true;
                 fileHelper.downloadFile('http://lrsnate.fr/assets/resources/works.db',
@@ -50,7 +50,7 @@ angular
                 });
             };
 
-            var start = () => {
+            const start = () => {
                 this.messages.push('Démarrage de l\'application dans 3 secondes...');
                 $timeout(() => $location.path('/search'), 3000);
             };

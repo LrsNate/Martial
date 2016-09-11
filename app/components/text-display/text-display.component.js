@@ -12,7 +12,7 @@ angular
             this.isCollapsed = true;
             this.referencedWork = null;
 
-            var init = () => {
+            const init = () => {
                 if (this.work.author === 'Martial') {
                     this.referencedWork = null;
                 } else {

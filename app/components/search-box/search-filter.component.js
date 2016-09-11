@@ -21,7 +21,7 @@ angular
             };
 
             this.getMatchers = () => {
-                var field = this.filter.field;
+                const field = this.filter.field;
                 if (!field) return [];
 
                 return _.filter(this.matchers, {type: field.type});
@@ -34,7 +34,7 @@ angular
             };
 
             this.updateValues = () => {
-                var field = this.filter.field;
+                const field = this.filter.field;
                 if (field.id === 'work') {
                     worksDao.getMartialReferences().then((values) => {
                         this.values = values;

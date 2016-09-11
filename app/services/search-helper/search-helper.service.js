@@ -34,8 +34,8 @@ class SearchHelper {
             this.$timeout(() => {
                 this.imitations = {};
 
-                for (var i = 0; i < fullWorks.length; i++) {
-                    var martialReference = fullWorks[i].martialReference || fullWorks[i].reference;
+                for (let i = 0; i < fullWorks.length; i++) {
+                    const martialReference = fullWorks[i].martialReference || fullWorks[i].reference;
                     if (this.imitations.hasOwnProperty(martialReference)) {
                         this.imitations[martialReference].push(fullWorks[i]);
                     } else {
@@ -53,9 +53,9 @@ class SearchHelper {
                 reject();
             }
             this.$timeout(() => {
-                var works = fullWorks;
+                let works = fullWorks;
                 /*jshint loopfunc: true */
-                for (var i = 0; i < filters.length; i++) {
+                for (let i = 0; i < filters.length; i++) {
                     if (!filters[i].term || !filters[i].matcher) {
                         continue;
                     }
@@ -63,7 +63,7 @@ class SearchHelper {
                         works = this.imitations[filters[i].term];
                     } else {
                         works = _.filter(works, (work) => {
-                            var filter = this.matchers[filters[i].field.type][filters[i].matcher.id];
+                            const filter = this.matchers[filters[i].field.type][filters[i].matcher.id];
                             return filter(work, filters[i].field.id, filters[i].term);
                         });
                     }
