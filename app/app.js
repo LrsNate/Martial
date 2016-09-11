@@ -4,9 +4,10 @@
 angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
-     'ngSanitize',
+    'ngSanitize',
     'angular-filters',
     'myApp.boot',
+    'myApp.changelog',
     'myApp.navigationBar',
     'myApp.search',
     'myApp.version',
