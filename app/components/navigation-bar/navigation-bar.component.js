@@ -7,9 +7,7 @@ angular
         controller: ['$scope', '$location', function ($scope, $location) {
             $scope.$watch(() => $location.path(), (route) => {
                 this.route = route;
-                console.log(this.route);
             });
             this.route = $location.path();
-            console.log(this.route);
         }]
     });

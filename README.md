@@ -8,8 +8,3 @@ ainsi que leurs imitations.
 ```
 npm start
 ```
-
-## Reste à faire
-
-* Déploiement automatisé
-* Page d'ajout/édition d'une oeuvre
