@@ -7,21 +7,23 @@ var BrowserWindow = electron.BrowserWindow;
 
 var autoUpdater = electron.autoUpdater;
 
-
 if (process.env.NODE_ENV !== 'development') {
     let appVersion = require('./package.json').version;
     let updateFeed = 'https://martial-releases.herokuapp.com/update';
     autoUpdater.setFeedURL(updateFeed + '?version=' + appVersion + '&platform=darwin');
 
     setInterval(() => autoUpdater.checkForUpdates(), 1800000);
+    autoUpdater.checkForUpdates();
 
     autoUpdater.on('error', (error) => {});
 
-    autoUpdater.on('update-downloaded', () => {
+    autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
         electron.dialog.showMessageBox({
             buttons: ['Ok'],
             message: 'Nouvelle mise à jour',
-            detail: 'Une nouvelle mise à jour est disponible. Elle sera installée au prochain démarrage de l\'application.'
+            detail: 'Une nouvelle mise à jour est disponible. Elle sera installée au prochain ' +
+            'démarrage de l\'application.\n\n' +
+            'Nouvelle version: v' + releaseName + '\n' + releaseNotes
         });
     });
 }
