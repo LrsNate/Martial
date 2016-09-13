@@ -7,6 +7,7 @@
   "repository": "https://github.com/LrsNate/Martial",
   "license": "MIT",
   "devDependencies": {
+    "electron-builder": "^6.7.3",
     "bower": "^1.7.7",
     "electron-prebuilt-compile": "^1.3.0",
     "jasmine-core": "^2.4.1",
@@ -33,6 +34,6 @@
   },
   "build": {
     "appId": "fr.nate.martial",
-    "category": "public.app-category.productivity"
+    "category": "public.app-category.education"
   }
 }

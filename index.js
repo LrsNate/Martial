@@ -6,16 +6,25 @@ var app = electron.app;
 var BrowserWindow = electron.BrowserWindow;
 
 var autoUpdater = electron.autoUpdater;
-var appVersion = require('./package.json').version;
-var os = require('os').platform();
 
-// var updateFeed = 'http://localhost:3000/updates/latest';
-//
-// if (process.env.NODE_ENV !== 'development') {
-//     updateFeed = 'https://martial-releases.herokuapp.com/updates/latest';
-// }
-//
-// autoUpdater.setFeedURL(updateFeed + '?v=' + appVersion);
+
+if (process.env.NODE_ENV !== 'development') {
+    let appVersion = require('./package.json').version;
+    let updateFeed = 'https://martial-releases.herokuapp.com/updates/latest';
+    autoUpdater.setFeedURL(updateFeed + '?v=' + appVersion + '&platform=darwin');
+
+    setInterval(() => autoUpdater.checkForUpdates(), 1800000);
+
+    autoUpdater.on('error', (error) => {});
+
+    autoUpdater.on('update-downloaded', () => {
+        electron.dialog.showMessageBox({
+            buttons: ['Ok'],
+            message: 'Une mise à jour est disponible. Elle sera installée au redémarrage de l\'application.'
+        });
+    });
+}
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -29,7 +38,7 @@ function createWindow() {
     mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -49,7 +58,8 @@ app.on('ready', createWindow);
 app.on('window-all-closed', function () {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
-    app.quit();
+    if (process.env.NODE_ENV !== 'development') autoUpdater.quitAndInstall();
+    else app.quit();
 });
 
 app.on('activate', function () {

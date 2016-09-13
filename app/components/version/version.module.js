@@ -2,4 +2,4 @@
 
 angular
     .module('myApp.version', [])
-    .value('version', process.env.npm_package_version);
+    .value('version', "1.0.0");
