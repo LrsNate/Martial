@@ -19,7 +19,6 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "prestart": "npm install",
     "start": "NODE_ENV=development ./node_modules/.bin/electron .",
     "pack": "build --dir",
     "dist": "build"
