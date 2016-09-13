@@ -2,4 +2,4 @@
 
 angular
     .module('myApp.version', [])
-    .value('version', "1.0.1");
+    .value('version', "1.0.2");
