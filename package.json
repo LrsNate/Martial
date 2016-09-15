@@ -24,6 +24,7 @@
     "dist": "build"
   },
   "dependencies": {
+    "mkdirp": "^0.5.1",
     "nedb": "^1.8.0",
     "osenv": "^0.1.3"
   },

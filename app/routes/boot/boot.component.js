@@ -18,15 +18,22 @@ angular
             this.messages = ['Vérification de la base de données...'];
             this.achieved = {percentage: 0, achieved: 0, total: 0};
 
-            fileHelper.fileExists('works.db').then((exists) => {
-                if (exists) {
-                    this.messages.push('Une base de données existe déjà.');
-                    this.isReady = true;
-                    $location.path('/search');
-                } else {
-                    downloadDatabase();
-                }
+            fileHelper.ensureFolderPathExists().then((message) => {
+                this.messages.push(message);
+                ensureDatabaseExists();
             });
+
+            const ensureDatabaseExists = () => {
+                fileHelper.fileExists('works.db').then((exists) => {
+                    if (exists) {
+                        this.messages.push('Une base de données existe déjà.');
+                        this.isReady = true;
+                        $location.path('/search');
+                    } else {
+                        downloadDatabase();
+                    }
+                });
+            };
 
             const downloadDatabase = () => {
                 this.messages.push('Aucune base de données n\'a pu être trouvée. Téléchargement en cours...');

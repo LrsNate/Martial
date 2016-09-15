@@ -7,6 +7,7 @@ class FileHelper {
         this.fs = require('fs');
         this.http = require('http');
         this.path = require('path');
+        this.mkdirp = require('mkdirp');
 
         const osenv = require('osenv');
         this.home = osenv.home();
@@ -24,6 +25,22 @@ class FileHelper {
     getFilePath(filename) {
         const folder = this.getDataFolderPath();
         return folder + this.sep + filename;
+    }
+
+    ensureFolderPathExists() {
+        let path = this.getDataFolderPath();
+        return this.$q((resolve) => {
+            this.fs.stat(path, (err, stats) => {
+                if (!err && stats.isDirectory()) {
+                    resolve('Le dossier ' + path + ' existe déjà.');
+                } else {
+                    if (!err && !stats.isDirectory()) this.fs.unlink(path);
+                    this.mkdirp.sync(this.getDataFolderPath());
+                    resolve('Le dossier ' + path + ' a été créé.');
+                }
+
+            });
+        });
     }
 
     fileExists(filename) {
