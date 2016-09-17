@@ -1,5 +1,7 @@
 'use strict';
 
+let packageJson = require('../package.json');
+
 angular
     .module('myApp.version', [])
-    .value('version', "1.1.0");
+    .value('version', packageJson.version);
