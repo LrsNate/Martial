@@ -29,7 +29,7 @@ class SearchHelper {
 
     createImitationsIndex(fullWorks) {
         return this.$q((resolve) => {
-            if (this.imitations) resolve();
+            if (this.imitations !== null) resolve();
 
             this.$timeout(() => {
                 this.imitations = {};

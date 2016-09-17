@@ -17,11 +17,18 @@ angular.module('myApp.search')
             this.phraseFilter = '';
             this.statusMessage = 'Chargement des épigrammes...';
             this.selectedWork = null;
+            this.hasReferences = {};
 
             worksDao.getWorks().then((works) => {
                 this.fullWorks = works;
                 this.works = works;
                 this.statusMessage = 'Aucune épigramme n\'a pu être trouvée avec ces critères';
+
+                searchHelper.createImitationsIndex(this.fullWorks).then(() => {
+                    angular.forEach(searchHelper.imitations, (value, key) => {
+                        if (value.length > 1) this.hasReferences[key] = true;
+                    });
+                });
             });
 
             this.setSelectedWork = (work) => this.selectedWork = work;
