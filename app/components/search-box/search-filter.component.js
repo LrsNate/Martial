@@ -28,8 +28,8 @@ angular
             };
 
             this.onFieldChange = () => {
-                delete this.filter.matcher;
                 delete this.filter.term;
+                this.filter.matcher = this.filter.field.defaultMatcher;
                 this.updateValues();
             };
 

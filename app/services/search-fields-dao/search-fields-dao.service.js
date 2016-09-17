@@ -5,11 +5,31 @@ angular
     .factory('searchFieldsDao', [() => {
         return {
             fields: [
-                {name: 'Auteur', id: 'author', type: 'string'},
-                {name: 'Publication', id: 'date_published', type: 'date'},
-                {name: 'Mètre', id: 'meter', type: 'string'},
-                {name: 'Strophe', id: 'stanza', type: 'string'},
-                {name: 'Oeuvre', id: 'work', type: 'work'}
+                {
+                    name: 'Auteur',
+                    id: 'author',
+                    type: 'string',
+                    defaultMatcher: {name: 'est', id: 'is', type: 'string'}
+                },
+                {
+                    name: 'Publication',
+                    id: 'date_published',
+                    type: 'date',
+                    defaultMatcher: {name: 'depuis', id: 'after', type: 'date'}
+                },
+                {name: 'Mètre', id: 'meter', type: 'string', defaultMatcher: {name: 'est', id: 'is', type: 'string'}},
+                {
+                    name: 'Strophe',
+                    id: 'stanza',
+                    type: 'string',
+                    defaultMatcher: {name: 'est', id: 'is', type: 'string'}
+                },
+                {
+                    name: 'Oeuvre',
+                    id: 'work',
+                    type: 'work',
+                    defaultMatcher: {name: 'imite', id: 'imitates', type: 'work'}
+                }
             ],
             matchers: [
                 {name: 'est', id: 'is', type: 'string'},
