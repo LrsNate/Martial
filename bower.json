@@ -16,6 +16,7 @@
     "lodash": "^4.15.0",
     "angular-filters": "ng-filters#^1.3.0",
     "angular-ui-select": "^0.19.4",
-    "angular-sanitize": "^1.5.8"
+    "angular-sanitize": "^1.5.8",
+    "sprintf": "^1.0.3"
   }
 }

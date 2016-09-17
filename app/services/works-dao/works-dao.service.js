@@ -1,8 +1,10 @@
 'use strict';
 
 class WorksDao {
-    constructor($q, fileHelper) {
+    constructor($q, fileHelper, sprintf, ofRoman) {
         this.$q = $q;
+        this.sprintf = sprintf;
+        this.ofRoman = ofRoman;
 
         const Datastore = require('nedb');
         this.nedb = new Datastore({
@@ -14,7 +16,17 @@ class WorksDao {
     getWorks() {
         return this.$q((resolve) => {
             this.nedb.find({}, (err, docs) => {
-                resolve(docs);
+                resolve(_.sortBy(docs, (d) => {
+                    let reference = (d.martialReference || d.reference).split(', ');
+                    let numeralFirstReference = reference[0] === 'De Spectaculis' ? 0 : this.ofRoman(reference[0]);
+                    let refCore = parseInt(reference[1]) ;
+                    var refPostfix = reference[1].substr(Math.log10(refCore));
+                    
+                    reference[0] = this.sprintf('%04d', numeralFirstReference);
+                    reference[1] = this.sprintf('%04d', refCore) + refPostfix;
+                    reference[2] = _.lowerCase(d.author === 'Martial' ? 'a' : d.author);
+                    return reference;
+                }));
             });
         });
     }
@@ -55,4 +67,5 @@ class WorksDao {
 
 angular
     .module('myApp.worksDao')
-    .factory('worksDao', ($q, fileHelper) => new WorksDao($q, fileHelper));
+    .factory('worksDao', ($q, fileHelper, sprintfFilter, ofRomanFilter) =>
+        new WorksDao($q, fileHelper, sprintfFilter, ofRomanFilter));
