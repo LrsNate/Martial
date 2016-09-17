@@ -25,7 +25,7 @@
         <div class="flex-fill" ng-switch-default>
             <ui-select ng-model="$ctrl.filter.term" theme="bootstrap" on-select="$ctrl.onUpdate()">
                 <ui-select-match placeholder="Terme à rechercher">{{ $select.selected }}</ui-select-match>
-                <ui-select-choices repeat="value in $ctrl.values | filter: $select.search">
+                <ui-select-choices repeat="value in $ctrl.values | filter: $select.search | limitTo: 100">
                     <span ng-bind-html="value | highlight: $select.search"></span>
                 </ui-select-choices>
             </ui-select>
