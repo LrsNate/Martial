@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('myApp.changelog', []);
+angular.module('myApp.changelog', ['myApp.changelogItems']);
