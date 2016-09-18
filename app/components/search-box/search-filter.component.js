@@ -31,6 +31,7 @@ angular
                 delete this.filter.term;
                 this.filter.matcher = this.filter.field.defaultMatcher;
                 this.updateValues();
+                this.onUpdate();
             };
 
             this.updateValues = () => {
