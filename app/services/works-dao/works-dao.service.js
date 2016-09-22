@@ -31,6 +31,14 @@ class WorksDao {
         });
     }
 
+    getWork(workId) {
+        return this.$q((resolve) => {
+            this.nedb.findOne({_id: workId}, (err, doc) => {
+                resolve(doc);
+            });
+        });
+    }
+
     getField(fieldName) {
         return this.$q((resolve) => {
             this.nedb.find({}, (err, docs) => {

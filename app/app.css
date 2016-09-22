@@ -85,3 +85,11 @@ footer {
 #search-results td {
     vertical-align: middle; !important
 }
+
+.text-edit {
+    min-height: 300px;
+}
+
+.edit-submit {
+    margin-top: 20px;
+}

@@ -9,7 +9,7 @@ angular.module('myApp.search')
     }])
 
     .component('search', {
-        controller: ['worksDao', 'searchHelper', function (worksDao, searchHelper) {
+        controller: ['$location', 'worksDao', 'searchHelper', function ($location, worksDao, searchHelper) {
 
             this.fullWorks = [];
             this.works = [];
@@ -32,6 +32,10 @@ angular.module('myApp.search')
             });
 
             this.setSelectedWork = (work) => this.selectedWork = work;
+
+            this.edit = (work) => {
+                $location.path('/work/' + work._id + '/edit');
+            };
 
             this.filterByReference = (work) => {
                 this.filters = [

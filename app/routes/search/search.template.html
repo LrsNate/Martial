@@ -22,10 +22,15 @@
             <td ng-click="$ctrl.setSelectedWork(work)">
                 {{ work.latinText || work.frenchText | limitTo: 50 }}...
             </td>
-            <td><a type="button"
+            <td>
+                <a type="button"
+                   ng-click="$ctrl.edit(work)"
+                   class="btn btn-sm btn-default">Éditer</a>
+                <a type="button"
                    ng-click="$ctrl.filterByReference(work)"
                    ng-if="work.author === 'Martial' && $ctrl.hasReferences[work.reference]"
-                   class="btn btn-sm btn-default">Imitations</a></td>
+                   class="btn btn-sm btn-info">Imitations</a>
+            </td>
         </tr>
         </tbody>
     </table>

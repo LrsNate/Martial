@@ -8,6 +8,7 @@ angular.module('myApp', [
     'angular-filters',
     'myApp.boot',
     'myApp.changelog',
+    'myApp.edit',
     'myApp.navigationBar',
     'myApp.search',
     'myApp.version',
