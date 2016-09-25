@@ -21,7 +21,7 @@ class WorksDao {
                     if (reference === null) return ['9999', '9999', _.lowerCase(d.author)];
 
                     reference = reference.split(', ');
-                    
+
                     let numeralFirstReference = reference[0] === 'De Spectaculis' ? 0 : this.ofRoman(reference[0]);
                     let refCore = parseInt(reference[1]) ;
                     let refPostfix = reference[1].substr(Math.log10(refCore));
@@ -92,26 +92,6 @@ class WorksDao {
                     .map(doc => doc[fieldName])
                     .sortBy(term => term ? term.toLowerCase() : null)
                     .sortedUniq()
-                    .value()
-                );
-            });
-        });
-    }
-
-    getMartialWork(reference) {
-        return this.$q((resolve) => {
-            this.nedb.findOne({author: 'Martial', reference: reference}, (err, doc) => {
-                resolve(doc);
-            });
-        });
-    }
-
-    getMartialReferences() {
-        return this.$q((resolve) => {
-            this.nedb.find({author: 'Martial'}, (err, docs) => {
-                resolve(_(docs)
-                    .map(doc => doc.reference)
-                    .sortBy()
                     .value()
                 );
             });

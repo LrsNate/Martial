@@ -13,12 +13,12 @@ angular
             this.referencedWork = null;
 
             const init = () => {
-                if (this.work.author === 'Martial') {
-                    this.referencedWork = null;
-                } else {
-                    worksDao.getMartialWork(this.work.martialReference).then((doc) => {
+                if (this.work.originId) {
+                    worksDao.getWork(this.work.originId).then((doc) => {
                         this.referencedWork = doc;
                     });
+                } else {
+                    this.referencedWork = null;
                 }
                 this.isCollapsed = false;
             };

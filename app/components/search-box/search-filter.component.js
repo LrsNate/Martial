@@ -16,10 +16,6 @@ angular
 
             this.values = [];
 
-            this.isSeletableField = () => {
-                return this.filter.field && this.filter.field.id === 'date_published';
-            };
-
             this.getMatchers = () => {
                 const field = this.filter.field;
                 if (!field) return [];
@@ -37,12 +33,16 @@ angular
             this.updateValues = () => {
                 const field = this.filter.field;
                 if (field.id === 'work') {
-                    worksDao.getMartialReferences().then((values) => {
-                        this.values = values;
+                    worksDao.getWorks().then((works) => {
+                        this.values = _.map(works, (work) => {
+                            return {name: work.author + ': ' + work.reference, id: work._id};
+                        });
                     });
                 } else if (field.id) {
                     worksDao.getField(field.id).then((values) => {
-                        this.values = values;
+                        this.values = _.map(values, (v) => {
+                            return {name: v, id: v};
+                        });
                     });
                 } else {
                     this.values = [];

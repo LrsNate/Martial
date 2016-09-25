@@ -9,23 +9,23 @@ class SearchHelper {
         this.matchers = {
             string: {
                 is(work, field, term) {
-                    return work[field] === term;
+                    return work[field] === term.id;
                 },
                 is_not(work, field, term) {
-                    return work[field] !== term;
+                    return work[field] !== term.id;
                 }
             },
             date: {
                 after(work, field, term) {
-                    return work[field] >= parseInt(term);
+                    return work[field] >= parseInt(term.id);
                 },
                 before(work, field, term) {
-                    return work[field] <= parseInt(term);
+                    return work[field] <= parseInt(term.id);
                 }
             },
             work: {
                 imitates(work, field, term) {
-                    return work._id === term._id || work.originId === term._id;
+                    return work._id === term.id || work.originId === term.id;
                 }
             }
         };
@@ -33,9 +33,6 @@ class SearchHelper {
 
     applyFilters(filters, fullWorks) {
         return this.$q((resolve, reject) => {
-            if (!this.imitations) {
-                reject();
-            }
             this.$timeout(() => {
                 let works = fullWorks;
                 /*jshint loopfunc: true */

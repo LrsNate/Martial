@@ -41,7 +41,7 @@ angular.module('myApp.search')
                     {
                         field: {name: 'Oeuvre', id: 'work', type: 'work'},
                         matcher: {name: 'imite', id: 'imitates', type: 'work'},
-                        term: work.reference
+                        term: {name: work.author + ': ' + work.reference, id: work._id}
                     }
                 ];
                 this.phraseFilter = '';
