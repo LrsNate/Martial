@@ -5,7 +5,6 @@ class SearchHelper {
     constructor($q, $timeout) {
         this.$q = $q;
         this.$timeout = $timeout;
-        this.imitations = null;
 
         this.matchers = {
             string: {
@@ -24,27 +23,12 @@ class SearchHelper {
                     return work[field] <= parseInt(term);
                 }
             },
-        };
-    }
-
-    createImitationsIndex(fullWorks) {
-        return this.$q((resolve) => {
-            if (this.imitations !== null) resolve();
-
-            this.$timeout(() => {
-                this.imitations = {};
-
-                for (let i = 0; i < fullWorks.length; i++) {
-                    const martialReference = fullWorks[i].martialReference || fullWorks[i].reference;
-                    if (this.imitations.hasOwnProperty(martialReference)) {
-                        this.imitations[martialReference].push(fullWorks[i]);
-                    } else {
-                        this.imitations[martialReference] = [fullWorks[i]];
-                    }
+            work: {
+                imitates(work, field, term) {
+                    return work._id === term._id || work.originId === term._id;
                 }
-                resolve();
-            });
-        });
+            }
+        };
     }
 
     applyFilters(filters, fullWorks) {
@@ -59,14 +43,10 @@ class SearchHelper {
                     if (!filters[i].term || !filters[i].matcher) {
                         continue;
                     }
-                    if (filters[i].matcher.id === 'imitates') {
-                        works = this.imitations[filters[i].term];
-                    } else {
-                        works = _.filter(works, (work) => {
-                            const filter = this.matchers[filters[i].field.type][filters[i].matcher.id];
-                            return filter(work, filters[i].field.id, filters[i].term);
-                        });
-                    }
+                    works = _.filter(works, (work) => {
+                        const filter = this.matchers[filters[i].field.type][filters[i].matcher.id];
+                        return filter(work, filters[i].field.id, filters[i].term);
+                    });
                 }
                 resolve(works);
             });

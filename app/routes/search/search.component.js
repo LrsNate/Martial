@@ -24,10 +24,9 @@ angular.module('myApp.search')
                 this.works = works;
                 this.statusMessage = 'Aucune épigramme n\'a pu être trouvée avec ces critères';
 
-                searchHelper.createImitationsIndex(this.fullWorks).then(() => {
-                    angular.forEach(searchHelper.imitations, (value, key) => {
-                        if (value.length > 1) this.hasReferences[key] = true;
-                    });
+                _.each(works, (work) => {
+                    if (work.originId)
+                        this.hasReferences[work.originId] = true;
                 });
             });
 

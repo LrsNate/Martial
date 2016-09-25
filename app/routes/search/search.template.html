@@ -28,7 +28,7 @@
                    class="btn btn-sm btn-default">Éditer</a>
                 <a type="button"
                    ng-click="$ctrl.filterByReference(work)"
-                   ng-if="work.author === 'Martial' && $ctrl.hasReferences[work.reference]"
+                   ng-if="$ctrl.hasReferences[work._id]"
                    class="btn btn-sm btn-info">Imitations</a>
             </td>
         </tr>

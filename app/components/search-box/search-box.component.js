@@ -9,17 +9,9 @@ angular
         phraseFilter: '=',
         onUpdate: '&'
     },
-    controller: ['$timeout', 'worksDao', 'searchHelper', function ($timeout, worksDao, searchHelper) {
+    controller: ['$timeout', 'worksDao', function ($timeout) {
 
         this.statusMessage = 'Préparation de l\'index de recherche...';
-
-        worksDao.getWorks()
-            .then((works) => {
-                return searchHelper.createImitationsIndex(works);
-            })
-            .then(() => {
-                this.statusMessage = '';
-            });
 
         this.deleteFilter = (index) => {
             this.filters.splice(index, 1);
