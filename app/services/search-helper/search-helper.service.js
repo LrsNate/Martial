@@ -32,7 +32,7 @@ class SearchHelper {
     }
 
     applyFilters(filters, fullWorks) {
-        return this.$q((resolve, reject) => {
+        return this.$q((resolve) => {
             this.$timeout(() => {
                 let works = fullWorks;
                 /*jshint loopfunc: true */
