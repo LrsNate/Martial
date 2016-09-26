@@ -92,4 +92,9 @@ footer {
 
 .edit-submit {
     margin-top: 20px;
+    text-align: center;
+}
+
+.vice-input {
+    margin-bottom: 10px;
 }

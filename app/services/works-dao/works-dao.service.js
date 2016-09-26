@@ -97,6 +97,15 @@ class WorksDao {
             });
         });
     }
+
+    updateWork(work) {
+        let id = work._id;
+        return this.$q((resolve) => {
+            this.nedb.update({_id: id}, work, () => {
+                resolve();
+            });
+        });
+    }
 }
 
 angular
