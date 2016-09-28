@@ -33,7 +33,7 @@ angular.module('myApp.search')
             this.setSelectedWork = (work) => this.selectedWork = work;
 
             this.edit = (work) => {
-                $location.path('/work/' + work._id + '/edit');
+                $location.path('/edit/' + work._id);
             };
 
             this.filterByReference = (work) => {

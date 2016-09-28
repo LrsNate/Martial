@@ -3,7 +3,7 @@
 angular
     .module('myApp.edit')
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/work/:workId/edit', {
+        $routeProvider.when('/edit/:workId', {
             template: '<edit></edit>'
         });
     }])

@@ -6,8 +6,13 @@ angular
         templateUrl: 'components/navigation-bar/navigation-bar.template.html',
         controller: ['$scope', '$location', function ($scope, $location) {
             $scope.$watch(() => $location.path(), (route) => {
-                this.route = route;
+                let words = route.split('/');
+                this.route = words[1];
             });
-            this.route = $location.path();
+
+            this.isOtherRoute = () => {
+                return this.route != 'search' &&
+                    this.route != 'changelog';
+            };
         }]
     });
