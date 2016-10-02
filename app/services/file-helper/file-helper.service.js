@@ -85,4 +85,4 @@ class FileHelper {
 }
 
 angular.module('myApp.fileHelper')
-    .factory('fileHelper', ($q) => new FileHelper($q));
+    .service('fileHelper', FileHelper);

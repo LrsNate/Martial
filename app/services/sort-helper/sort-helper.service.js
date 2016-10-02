@@ -2,9 +2,9 @@
 
 class SortHelper {
 
-    constructor(sprintf, ofRoman) {
-        this.sprintf = sprintf;
-        this.ofRoman = ofRoman;
+    constructor(sprintfFilter, ofRomanFilter) {
+        this.sprintf = sprintfFilter;
+        this.ofRoman = ofRomanFilter;
     }
 
     getSortKey(docs, doc) {
@@ -40,4 +40,4 @@ class SortHelper {
 }
 
 angular.module('myApp.sortHelper')
-    .factory('sortHelper', (sprintfFilter, ofRomanFilter) => new SortHelper(sprintfFilter, ofRomanFilter));
+    .service('sortHelper', SortHelper);

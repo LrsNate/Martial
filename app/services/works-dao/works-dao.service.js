@@ -58,5 +58,4 @@ class WorksDao {
 
 angular
     .module('myApp.worksDao')
-    .factory('worksDao', ($q, fileHelper, sortHelper) =>
-        new WorksDao($q, fileHelper, sortHelper));
+    .service('worksDao', WorksDao);

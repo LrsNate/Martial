@@ -53,4 +53,4 @@ class SearchHelper {
 
 angular
     .module('myApp.searchHelper')
-    .factory('searchHelper', ($q, $timeout) => new SearchHelper($q, $timeout));
+    .service('searchHelper', SearchHelper);
