@@ -12,6 +12,13 @@
         <span ng-if="$ctrl.work.title">
             - <span ng-bind="$ctrl.work.title"></span>
         </span>
+
+        <small ng-if="$ctrl.referencedWork" class="gray-text">
+            (inspiré de
+            <strong ng-bind="$ctrl.referencedWork.author"></strong>
+            <span ng-if="$ctrl.referencedWork.reference">
+                - <span ng-bind="$ctrl.referencedWork.reference"></span></span>)
+        </small>
     </p>
     <div class="text-display-caret" ng-click="$ctrl.onDelete()">
         <span class="glyphicon glyphicon-remove"></span>
