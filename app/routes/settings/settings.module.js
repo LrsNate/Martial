@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('myApp.settings', []);
+angular.module('myApp.settings', ['myApp.downloadProgress']);

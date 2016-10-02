@@ -16,7 +16,7 @@ angular
             this.showProgress = false;
             this.hasErrored = false;
             this.messages = ['Vérification de la base de données...'];
-            this.achieved = {percentage: 0, achieved: 0, total: 0};
+            this.downloadProgress = {achieved: 0, total: 0};
 
             fileHelper.ensureFolderPathExists().then((message) => {
                 this.messages.push(message);
@@ -38,11 +38,10 @@ angular
             const downloadDatabase = () => {
                 this.messages.push('Aucune base de données n\'a pu être trouvée. Téléchargement en cours...');
                 this.showProgress = true;
-                fileHelper.downloadFile('http://lrsnate.fr/assets/resources/works.db',
+                fileHelper.downloadWorksDatabase(
                     (achieved, total) => {
-                        this.achieved.percentage = parseInt(achieved / total * 100);
-                        this.achieved.achieved = achieved;
-                        this.achieved.total = total;
+                        this.downloadProgress.achieved = achieved;
+                        this.downloadProgress.total = total;
                         $scope.$digest();
                     }
                 ).then(() => {

@@ -1,3 +1,22 @@
 <div class="container-fluid">
     <h3>Paramètres</h3>
+
+    <h5>Réinitialiser la base de données
+        <a type="button"
+           class="btn btn-sm btn-success"
+           ng-click="$ctrl.downloadDatabase()"
+           ng-disabled="$ctrl.downloadProgress.inProgress">
+            Lancer</a>
+    </h5>
+
+    <p>Cette action efface la base de données locale et la remplace par la base de référence sur Internet.
+    <strong>Tout changement sera perdu.</strong></p>
+    <p ng-bind="$ctrl.downloadStatus"></p>
+    <download-progress
+            ng-if="$ctrl.downloadProgress.inProgress"
+            achieved="$ctrl.downloadProgress.achieved"
+            total="$ctrl.downloadProgress.total">
+    </download-progress>
+
+
 </div>

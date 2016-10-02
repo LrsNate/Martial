@@ -4,12 +4,11 @@
     <ul>
         <li ng-repeat="message in $ctrl.messages" ng-bind="message"></li>
     </ul>
-    <div ng-if="$ctrl.showProgress">
-        <p>Avancement: {{ $ctrl.achieved.achieved | bytes }}/{{ $ctrl.achieved.total | bytes }}</p>
-        <uib-progressbar value="$ctrl.achieved.percentage" ng-if="$ctrl.showProgress">
-            <strong>{{$ctrl.achieved.percentage}}%</strong>
-        </uib-progressbar>
-    </div>
+    <download-progress
+            ng-show="$ctrl.showProgress"
+            achieved="$ctrl.downloadProgress.achieved"
+            total="$ctrl.downloadProgress.total">
+    </download-progress>
 
     <div ng-if="$ctrl.hasErrored">
         <div class="alert alert-danger">

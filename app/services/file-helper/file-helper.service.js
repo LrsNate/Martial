@@ -51,6 +51,10 @@ class FileHelper {
         });
     }
 
+    downloadWorksDatabase(progress) {
+        return this.downloadFile('http://lrsnate.fr/assets/resources/works.db', progress);
+    }
+
     downloadFile(fileUrl, progress) {
         return this.$q((resolve, reject) => {
             const filename = this.path.basename(fileUrl);
