@@ -1,9 +1,6 @@
-'use strict';
-
-angular
-    .module('myApp.version')
-    .directive('appVersion', ['version', (version) => {
-        return (scope, elm, attrs) => {
-            elm.text(version);
-        };
-    }]);
+export default () => {
+    let packageJson = require('../../../package.json');
+    return (scope, elm, attrs) => {
+        elm.text(packageJson.version);
+    };
+};

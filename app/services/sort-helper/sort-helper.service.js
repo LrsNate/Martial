@@ -1,8 +1,6 @@
-'use strict';
+import {sprintf} from 'sprintf-js';
 
-let sprintf = require('sprintf-js').sprintf;
-
-class SortHelper {
+export default class SortHelperService {
 
     constructor(ofRomanFilter) {
         this.ofRoman = ofRomanFilter;
@@ -39,6 +37,3 @@ class SortHelper {
         return reference;
     }
 }
-
-angular.module('myApp.sortHelper')
-    .service('sortHelper', SortHelper);

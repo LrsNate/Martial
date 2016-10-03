@@ -1,15 +1,11 @@
-'use strict';
-
-angular
-    .module('myApp.searchBox')
-    .component('searchBox', {
+export default {
     templateUrl: 'components/search-box/search-box.template.html',
     bindings: {
         filters: '=',
         phraseFilter: '=',
         onUpdate: '&'
     },
-    controller: ['$timeout', 'worksDao', function ($timeout) {
+    controller: ['$timeout', function ($timeout) {
 
         this.statusMessage = 'Préparation de l\'index de recherche...';
 
@@ -30,4 +26,4 @@ angular
             });
         };
     }]
-});
+};

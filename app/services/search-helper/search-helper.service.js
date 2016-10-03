@@ -1,6 +1,4 @@
-'use strict';
-
-class SearchHelper {
+export default class SearchHelperService {
 
     constructor($q, $timeout) {
         this.$q = $q;
@@ -50,7 +48,3 @@ class SearchHelper {
         });
     }
 }
-
-angular
-    .module('myApp.searchHelper')
-    .service('searchHelper', SearchHelper);

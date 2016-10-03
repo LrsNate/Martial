@@ -1,6 +1,4 @@
-'use strict';
-
-class FileHelper {
+export default class FileHelperService {
 
     constructor ($q) {
         this.$q = $q;
@@ -83,6 +81,3 @@ class FileHelper {
         });
     }
 }
-
-angular.module('myApp.fileHelper')
-    .service('fileHelper', FileHelper);

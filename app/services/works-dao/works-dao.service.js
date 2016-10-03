@@ -1,8 +1,6 @@
-'use strict';
+import * as _ from 'lodash';
 
-require('lodash');
-
-class WorksDao {
+export default class WorksDaoService {
     constructor($q, fileHelper, sortHelper) {
         this.$q = $q;
         this.fileHelper = fileHelper;
@@ -57,7 +55,3 @@ class WorksDao {
         });
     }
 }
-
-angular
-    .module('myApp.worksDao')
-    .service('worksDao', WorksDao);

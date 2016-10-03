@@ -1,33 +1,31 @@
-'use strict';
+import angular from 'angular';
+import 'angular-route';
+import 'angular-animate';
+import 'angular-sanitize';
+import NavigationBar from './components/navigation-bar';
+import Version from './components/version';
+import Boot from './routes/boot';
+import Changelog from './routes/changelog';
+import Edit from './routes/edit';
+import Search from './routes/search';
+import Settings from './routes/settings';
 
-require('angular');
-require('angular-route');
-require('angular-animate');
-require('angular-sanitize');
-
-require('./components/navigation-bar/navigation-bar.module');
-require('./components/version/version.module');
-
-require('./routes/boot/boot.module');
-require('./routes/changelog/changelog.module');
-require('./routes/edit/edit.module');
-require('./routes/search/search.module');
-require('./routes/settings/settings.module');
+function config($locationProvider, $routeProvider) {
+    $locationProvider.hashPrefix('!');
+    $routeProvider.otherwise({redirectTo: '/boot'});
+}
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
-    'ngRoute',
-    'ngAnimate',
-    'ngSanitize',
-    'myApp.boot',
-    'myApp.changelog',
-    'myApp.edit',
-    'myApp.navigationBar',
-    'myApp.search',
-    'myApp.settings',
-    'myApp.version',
-]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
-
-    $routeProvider.otherwise({redirectTo: '/boot'});
-}]);
+export default angular.module('myApp', [
+        'ngRoute',
+        'ngAnimate',
+        'ngSanitize',
+        NavigationBar.name,
+        Version.name,
+        Boot.name,
+        Changelog.name,
+        Edit.name,
+        Search.name,
+        Settings.name
+    ])
+    .config(config);
