@@ -7,22 +7,24 @@
   "repository": "https://github.com/LrsNate/Martial",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
     "bower": "^1.7.7",
     "electron-builder": "^6.7.3",
     "electron-prebuilt-compile": "^1.3.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "json-loader": "^0.5.4",
     "webpack": "^1.13.2"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "cd app && npm install",
     "start": "NODE_ENV=development ./node_modules/.bin/electron .",
     "webpack": "webpack --progress --colors",
+    "webpack-watch": "webpack --progress --colors --watch",
     "pack": "build --dir",
+    "predist": "webpack --progress --colors",
     "dist": "build"
-  },
-  "dependencies": {
-    "mkdirp": "^0.5.1",
-    "nedb": "^1.8.0",
-    "osenv": "^0.1.3"
   },
   "build": {
     "appId": "fr.nate.martial",

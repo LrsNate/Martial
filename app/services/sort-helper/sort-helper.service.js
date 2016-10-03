@@ -1,9 +1,10 @@
 'use strict';
 
+let sprintf = require('sprintf-js').sprintf;
+
 class SortHelper {
 
-    constructor(sprintfFilter, ofRomanFilter) {
-        this.sprintf = sprintfFilter;
+    constructor(ofRomanFilter) {
         this.ofRoman = ofRomanFilter;
     }
 
@@ -18,8 +19,8 @@ class SortHelper {
         let refPostfix = reference[1].substr(Math.log10(refCore));
 
         return [
-            this.sprintf('%04d', numeralFirstReference),
-            this.sprintf('%04d', refCore) + refPostfix,
+            sprintf('%04d', numeralFirstReference),
+            sprintf('%04d', refCore) + refPostfix,
             _.lowerCase(doc.author === 'Martial' ? 'a' : doc.author)
         ];
     }

@@ -1,6 +1,9 @@
 'use strict';
 
+require('../../filters/numerals/numerals.module');
+
 angular.module('myApp.sortHelper', [
-    'sprintf',
     'myApp.numerals'
 ]);
+
+require('./sort-helper.service');

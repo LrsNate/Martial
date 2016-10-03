@@ -1,3 +1,7 @@
 'use strict';
 
-angular.module('myApp.downloadProgress', []);
+require('angular-filter');
+
+angular.module('myApp.downloadProgress', ['angular.filter']);
+
+require('./download-progress.component');

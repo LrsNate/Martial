@@ -1,5 +1,5 @@
 <div>
-    <p>Avancement: {{ $ctrl.achieved | bytes }}/{{ $ctrl.total | bytes }}</p>
+    <p>Avancement: {{ $ctrl.achieved | byteFmt: 2 }}/{{ $ctrl.total | byteFmt: 2 }}</p>
     <uib-progressbar value="$ctrl.percentage || 0">
         <strong>{{$ctrl.percentage}}%</strong>
     </uib-progressbar>

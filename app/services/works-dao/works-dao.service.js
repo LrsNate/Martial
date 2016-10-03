@@ -1,5 +1,7 @@
 'use strict';
 
+require('lodash');
+
 class WorksDao {
     constructor($q, fileHelper, sortHelper) {
         this.$q = $q;

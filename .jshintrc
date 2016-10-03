@@ -21,7 +21,6 @@
 
     "require": false,
     "__dirname": false,
-    "process": false,
-    "_": false
+    "process": false
   }
 }

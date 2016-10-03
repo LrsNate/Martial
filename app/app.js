@@ -1,11 +1,12 @@
 'use strict';
 
-require('./bower_components/angular-route/angular-route');
-require('./bower_components/angular-animate/angular-animate');
-require('./bower_components/angular-sanitize/angular-sanitize');
-require('./bower_components/angular-filters/dist/angular-filters');
+require('angular');
+require('angular-route');
+require('angular-animate');
+require('angular-sanitize');
 
-require('./')
+require('./components/navigation-bar/navigation-bar.module');
+require('./components/version/version.module');
 
 require('./routes/boot/boot.module');
 require('./routes/changelog/changelog.module');
@@ -18,7 +19,6 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'ngSanitize',
-    'angular-filters',
     'myApp.boot',
     'myApp.changelog',
     'myApp.edit',
