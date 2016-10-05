@@ -41,8 +41,8 @@ export default class SearchHelperService {
                         return;
                     }
                     works = _.filter(works, (work) => {
-                        const filter = this._matchers[filter.field.type][filter.matcher.id];
-                        return filter(work, filter.field.id, filter.term);
+                        const filterFunction = this._matchers[filter.field.type][filter.matcher.id];
+                        return filterFunction(work, filter.field.id, filter.term);
                     });
                 });
 
