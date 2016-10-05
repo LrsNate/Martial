@@ -1,41 +1,41 @@
-import * as _ from 'lodash';
+import Datastore from 'nedb';
+let _ = require('lodash');
 
 export default class WorksDaoService {
     constructor($q, fileHelper, sortHelper) {
-        this.$q = $q;
-        this.fileHelper = fileHelper;
-        this.sortHelper = sortHelper;
+        this._$q = $q;
+        this._fileHelper = fileHelper;
+        this._sortHelper = sortHelper;
 
-        this.Datastore = require('nedb');
         this.init();
     }
 
     init() {
-        this.nedb = new this.Datastore({
-            filename: this.fileHelper.getFilePath('works.db'),
+        this._db = new Datastore({
+            filename: this._fileHelper.getFilePath('works.db'),
             autoload: true
         });
     }
 
     getWorks() {
-        return this.$q((resolve) => {
-            this.nedb.find({}, (err, docs) => {
-                resolve(_.sortBy(docs, (d) => this.sortHelper.getSortKey(docs, d)));
+        return this._$q((resolve) => {
+            this._db.find({}, (err, docs) => {
+                resolve(_.sortBy(docs, (d) => this._sortHelper.getSortKey(docs, d)));
             });
         });
     }
 
     getWork(workId) {
-        return this.$q((resolve) => {
-            this.nedb.findOne({_id: workId}, (err, doc) => {
+        return this._$q((resolve) => {
+            this._db.findOne({_id: workId}, (err, doc) => {
                 resolve(doc);
             });
         });
     }
 
     getField(fieldName) {
-        return this.$q((resolve) => {
-            this.nedb.find({}, (err, docs) => {
+        return this._$q((resolve) => {
+            this._db.find({}, (err, docs) => {
                 resolve(_(docs)
                     .map(doc => doc[fieldName])
                     .sortBy(term => term ? term.toLowerCase() : null)
@@ -48,8 +48,8 @@ export default class WorksDaoService {
 
     updateWork(work) {
         let id = work._id;
-        return this.$q((resolve) => {
-            this.nedb.update({_id: id}, work, () => {
+        return this._$q((resolve) => {
+            this._db.update({_id: id}, work, () => {
                 resolve();
             });
         });

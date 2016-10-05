@@ -1,10 +1,13 @@
+var _ = require('lodash');
+
 export default class SearchHelperService {
 
     constructor($q, $timeout) {
-        this.$q = $q;
-        this.$timeout = $timeout;
+        this._$q = $q;
+        this._$timeout = $timeout;
 
-        this.matchers = {
+        //noinspection JSUnusedLocalSymbols
+        this._matchers = {
             string: {
                 is(work, field, term) {
                     return work[field] === term.id;
@@ -30,19 +33,19 @@ export default class SearchHelperService {
     }
 
     applyFilters(filters, fullWorks) {
-        return this.$q((resolve) => {
-            this.$timeout(() => {
+        return this._$q((resolve) => {
+            this._$timeout(() => {
                 let works = fullWorks;
-                /*jshint loopfunc: true */
-                for (let i = 0; i < filters.length; i++) {
-                    if (!filters[i].term || !filters[i].matcher) {
-                        continue;
+                _.each(filters, (filter) => {
+                    if (!filter.term || !filter.matcher) {
+                        return;
                     }
                     works = _.filter(works, (work) => {
-                        const filter = this.matchers[filters[i].field.type][filters[i].matcher.id];
-                        return filter(work, filters[i].field.id, filters[i].term);
+                        const filter = this._matchers[filter.field.type][filter.matcher.id];
+                        return filter(work, filter.field.id, filter.term);
                     });
-                }
+                });
+
                 resolve(works);
             });
         });

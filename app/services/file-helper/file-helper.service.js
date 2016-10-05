@@ -1,15 +1,15 @@
+import * as fs from 'fs';
+import * as http from 'http';
+import * as path from 'path';
+import mkdirp from 'mkdirp';
+import osenv from 'osenv';
+
 export default class FileHelperService {
 
     constructor ($q) {
-        this.$q = $q;
-        this.fs = require('fs');
-        this.http = require('http');
-        this.path = require('path');
-        this.mkdirp = require('mkdirp');
-
-        const osenv = require('osenv');
-        this.home = osenv.home();
-        this.sep = process.platform === 'win32' ? '\\' : '/';
+        this._$q = $q;
+        this._home = osenv.home();
+        this._sep = process.platform === 'win32' ? '\\' : '/';
     }
 
     static get $inject() {
@@ -17,23 +17,23 @@ export default class FileHelperService {
     }
 
     getDataFolderPath() {
-        return this.home + this.sep + 'Documents' + this.sep + 'Martial';
+        return this._home + this._sep + 'Documents' + this._sep + 'Martial';
     }
 
     getFilePath(filename) {
         const folder = this.getDataFolderPath();
-        return folder + this.sep + filename;
+        return folder + this._sep + filename;
     }
 
     ensureFolderPathExists() {
         let path = this.getDataFolderPath();
-        return this.$q((resolve) => {
-            this.fs.stat(path, (err, stats) => {
+        return this._$q((resolve) => {
+            fs.stat(path, (err, stats) => {
                 if (!err && stats.isDirectory()) {
                     resolve('Le dossier ' + path + ' existe déjà.');
                 } else {
-                    if (!err && !stats.isDirectory()) this.fs.unlink(path);
-                    this.mkdirp.sync(this.getDataFolderPath());
+                    if (!err && !stats.isDirectory()) fs.unlink(path);
+                    mkdirp.sync(this.getDataFolderPath());
                     resolve('Le dossier ' + path + ' a été créé.');
                 }
 
@@ -42,8 +42,8 @@ export default class FileHelperService {
     }
 
     fileExists(filename) {
-        return this.$q((resolve) => {
-            this.fs.stat(this.getFilePath(filename),(err) => {
+        return this._$q((resolve) => {
+            fs.stat(this.getFilePath(filename),(err) => {
                 resolve(!err);
             });
         });
@@ -54,13 +54,13 @@ export default class FileHelperService {
     }
 
     downloadFile(fileUrl, progress) {
-        return this.$q((resolve, reject) => {
-            const filename = this.path.basename(fileUrl);
+        return this._$q((resolve, reject) => {
+            const filename = path.basename(fileUrl);
             const filePath = this.getFilePath(filename);
-            const fileHandle = this.fs.createWriteStream(filePath);
+            const fileHandle = fs.createWriteStream(filePath);
 
 
-            this.http.get(fileUrl, function (response) {
+            http.get(fileUrl, function (response) {
                 const total = response.headers['content-length'];
                 let achieved = 0;
                 response.pipe(fileHandle);
@@ -76,7 +76,7 @@ export default class FileHelperService {
                 });
 
             }).on('error', () => {
-                this.fs.unlink(filePath, reject);
+                fs.unlink(filePath, reject);
             });
         });
     }

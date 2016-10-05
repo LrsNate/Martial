@@ -1,9 +1,10 @@
 import {sprintf} from 'sprintf-js';
+let _ = require('lodash');
 
 export default class SortHelperService {
 
     constructor(ofRomanFilter) {
-        this.ofRoman = ofRomanFilter;
+        this._ofRoman = ofRomanFilter;
     }
 
     getSortKey(docs, doc) {
@@ -12,9 +13,9 @@ export default class SortHelperService {
 
         reference = reference.split(', ');
 
-        let numeralFirstReference = reference[0] === 'De Spectaculis' ? 0 : this.ofRoman(reference[0]);
-        let refCore = parseInt(reference[1]) ;
-        let refPostfix = reference[1].substr(Math.log10(refCore));
+        const numeralFirstReference = reference[0] === 'De Spectaculis' ? 0 : this._ofRoman(reference[0]);
+        const refCore = parseInt(reference[1]) ;
+        const refPostfix = reference[1].substr(Math.log10(refCore));
 
         return [
             sprintf('%04d', numeralFirstReference),
@@ -23,17 +24,20 @@ export default class SortHelperService {
         ];
     }
 
+    /**
+     * @param docs
+     * @param {{author: string, reference: string, originId: string}} doc
+     */
     resolveReference(docs, doc) {
-        let reference = null;
         if (doc.author === 'Martial') {
             return doc.reference;
         }
         else if (doc.originId) {
             let originWork = _.find(docs, (o) => doc.originId === o._id);
             if (originWork.author === 'Martial') {
-                reference = originWork.reference;
+                return originWork.reference;
             }
         }
-        return reference;
+        return null;
     }
 }
