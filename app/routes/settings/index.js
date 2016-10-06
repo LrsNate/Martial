@@ -7,6 +7,7 @@ function config($routeProvider) {
         template: '<settings></settings>'
     });
 }
+config.$inject = ['$routeProvider'];
 
 export default angular.module('myApp.settings', [
     FileHelper.name,

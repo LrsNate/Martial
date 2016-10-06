@@ -10,6 +10,10 @@ export default {
             this.downloadStatus = '';
         }
 
+        static get $inject() {
+            return ['fileHelper', 'worksDao', '$scope'];
+        }
+
         downloadDatabase() {
             this._fileHelper.downloadWorksDatabase((achieved, total) => {
                 this.downloadStatus = 'Téléchargement en cours...';

@@ -12,6 +12,10 @@ export default {
             this.statusMessage = 'Préparation de l\'index de recherche...';
         }
 
+        static get $inject() {
+            return ['$timeout'];
+        }
+
         //noinspection JSUnusedGlobalSymbols
         deleteFilter(index) {
             this.filters.splice(index, 1);

@@ -6,6 +6,7 @@ function config($routeProvider) {
         template: '<changelog></changelog>'
     });
 }
+config.$inject = ['$routeProvider'];
 
 export default angular.module('myApp.changelog', [ChangelogItems.name])
     .config(config)

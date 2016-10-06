@@ -7,6 +7,10 @@ export default class SortHelperService {
         this._ofRoman = ofRomanFilter;
     }
 
+    static get $inject() {
+        return ['ofRomanFilter'];
+    }
+
     getSortKey(docs, doc) {
         let reference = this.resolveReference(docs, doc);
         if (reference === null) return ['9999', '9999', _.lowerCase(doc.author)];

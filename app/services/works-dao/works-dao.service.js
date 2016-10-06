@@ -10,6 +10,10 @@ export default class WorksDaoService {
         this.init();
     }
 
+    static get $inject() {
+        return ['$q', 'fileHelper', 'sortHelper'];
+    }
+
     init() {
         this._db = new Datastore({
             filename: this._fileHelper.getFilePath('works.db'),

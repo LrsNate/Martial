@@ -8,6 +8,10 @@ export default {
             });
         }
 
+        static get $inject() {
+            return ['$scope', '$location'];
+        }
+
         //noinspection JSUnusedGlobalSymbols
         isOtherRoute() {
             return this.route != 'search' &&

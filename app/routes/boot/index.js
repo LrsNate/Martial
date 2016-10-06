@@ -7,6 +7,7 @@ function config($routeProvider) {
         template: '<boot></boot>'
     });
 }
+config.$inject = ['$routeProvider'];
 
 export default angular.module('myApp.boot', [FileHelper.name, DownloadProgress.name])
     .config(config)

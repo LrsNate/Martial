@@ -6,6 +6,7 @@ function config($routeProvider) {
         template: '<edit></edit>'
     });
 }
+config.$inject = ['$routeProvider'];
 
 export default angular.module('myApp.edit', [WorksDao.name])
     .config(config)

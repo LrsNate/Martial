@@ -15,6 +15,10 @@ export default {
             this._worksDao = worksDao;
         }
 
+        static get $inject() {
+            return ['searchFieldsDao', 'worksDao'];
+        }
+
         //noinspection JSUnusedGlobalSymbols
         getMatchers() {
             //noinspection JSUnresolvedVariable

@@ -12,6 +12,10 @@ export default {
             $scope.$watch(() => this.work, () => this.init());
         }
 
+        static get $inject() {
+            return ['$scope', 'worksDao'];
+        }
+
         init() {
             if (this.work.originId) {
                 this._worksDao.getWork(this.work.originId).then((doc) => {

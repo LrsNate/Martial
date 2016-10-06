@@ -28,6 +28,10 @@ export default {
             });
         }
 
+        static get $inject() {
+            return ['$location', 'worksDao', 'searchHelper'];
+        }
+
         //noinspection JSUnusedGlobalSymbols
         setSelectedWork(work) {
             this.selectedWork = work;

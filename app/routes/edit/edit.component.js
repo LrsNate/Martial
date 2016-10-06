@@ -19,6 +19,10 @@ export default {
             });
         }
 
+        static get $inject() {
+            return ['$routeParams', '$location', 'worksDao'];
+        }
+
         //noinspection JSUnusedGlobalSymbols
         saveWork() {
             this._worksDao.updateWork(this.work).then(() => {

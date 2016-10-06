@@ -9,6 +9,8 @@ function config($routeProvider) {
         template: '<search></search>'
     });
 }
+config.$inject = ['$routeProvider'];
+
 
 export default angular.module('myApp.search', [
         SearchBox.name,

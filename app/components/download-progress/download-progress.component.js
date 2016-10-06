@@ -11,5 +11,9 @@ export default {
                 this.percentage = parseInt(this.achieved / this.total * 100);
             });
         }
+
+        static get $inject() {
+            return ['$scope'];
+        }
     }
 };

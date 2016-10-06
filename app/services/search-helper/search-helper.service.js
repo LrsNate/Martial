@@ -32,6 +32,10 @@ export default class SearchHelperService {
         };
     }
 
+    static get $inject() {
+        return ['$q', '$timeout'];
+    }
+
     applyFilters(filters, fullWorks) {
         return this._$q((resolve) => {
             this._$timeout(() => {

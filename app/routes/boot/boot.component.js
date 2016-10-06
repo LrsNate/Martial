@@ -19,6 +19,10 @@ export default {
             });
         }
 
+        static get $inject() {
+            return ['$location', '$scope', '$timeout', 'fileHelper'];
+        }
+
 
         ensureDatabaseExists() {
             this._fileHelper.fileExists('works.db').then((exists) => {

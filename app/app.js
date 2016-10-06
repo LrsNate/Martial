@@ -14,6 +14,7 @@ function config($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
     $routeProvider.otherwise({redirectTo: '/boot'});
 }
+config.$inject = ['$locationProvider', '$routeProvider'];
 
 // Declare app level module which depends on views, and components
 export default angular.module('myApp', [

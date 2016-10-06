@@ -1,5 +1,4 @@
-'use strict';
-
+var webpack = require('webpack');
 
 module.exports = {
     entry: './app/app.js',
@@ -26,5 +25,9 @@ module.exports = {
         fs: 'empty',
         http: 'empty',
         path: 'empty'
-    }
+    },
+    plugins: [
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({minimize: true})
+    ]
 };
