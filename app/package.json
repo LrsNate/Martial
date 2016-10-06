@@ -1,4 +1,11 @@
 {
+  "name": "Martial",
+  "author": "Antoine Lafouasse",
+  "private": true,
+  "version": "1.2.1",
+  "description": "A database interface visualising work imitations.",
+  "repository": "https://github.com/LrsNate/Martial",
+  "license": "MIT",
   "dependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
