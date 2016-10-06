@@ -1,3 +1,5 @@
+let _ = require('lodash');
+
 export default {
     templateUrl: 'components/search-box/search-filter.template.html',
     bindings: {
@@ -5,37 +7,44 @@ export default {
         onUpdate: '&',
         onDelete: '&',
     },
-    controller: ['searchFieldsDao', 'worksDao', function (searchFieldsDao, worksDao) {
-        this.fields = searchFieldsDao.fields;
+    controller: class {
+        constructor(searchFieldsDao, worksDao) {
+            this.fields = searchFieldsDao.fields;
+            this.matchers = searchFieldsDao.matchers;
+            this.values = [];
+            this._worksDao = worksDao;
+        }
 
-        this.matchers = searchFieldsDao.matchers;
-
-        this.values = [];
-
-        this.getMatchers = () => {
+        //noinspection JSUnusedGlobalSymbols
+        getMatchers() {
+            //noinspection JSUnresolvedVariable
             const field = this.filter.field;
             if (!field) return [];
 
             return _.filter(this.matchers, {type: field.type});
-        };
+        }
 
-        this.onFieldChange = () => {
+        //noinspection JSUnusedGlobalSymbols
+        onFieldChange() {
+            //noinspection JSUnresolvedVariable
             delete this.filter.term;
+            //noinspection JSUnresolvedVariable
             this.filter.matcher = this.filter.field.defaultMatcher;
             this.updateValues();
             this.onUpdate();
-        };
+        }
 
-        this.updateValues = () => {
+        updateValues() {
+            //noinspection JSUnresolvedVariable
             const field = this.filter.field;
             if (field.id === 'work') {
-                worksDao.getWorks().then((works) => {
+                this._worksDao.getWorks().then((works) => {
                     this.values = _.map(works, (work) => {
                         return {name: work.author + ': ' + work.reference, id: work._id};
                     });
                 });
             } else if (field.id) {
-                worksDao.getField(field.id).then((values) => {
+                this._worksDao.getField(field.id).then((values) => {
                     this.values = _.map(values, (v) => {
                         return {name: v, id: v};
                     });
@@ -43,6 +52,6 @@ export default {
             } else {
                 this.values = [];
             }
-        };
-    }]
+        }
+    }
 };

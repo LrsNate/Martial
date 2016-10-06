@@ -4,7 +4,7 @@ export default {
         total: '='
     },
     templateUrl: 'components/download-progress/download-progress.template.html',
-    controller: class DownloadProgressController {
+    controller: class {
         constructor($scope) {
             this.percentage = 0;
             $scope.$watch(() => this.achieved, () => {

@@ -5,25 +5,30 @@ export default {
         phraseFilter: '=',
         onUpdate: '&'
     },
-    controller: ['$timeout', function ($timeout) {
+    controller: class {
 
-        this.statusMessage = 'Préparation de l\'index de recherche...';
+        constructor($timeout) {
+            this._$timeout = $timeout;
+            this.statusMessage = 'Préparation de l\'index de recherche...';
+        }
 
-        this.deleteFilter = (index) => {
+        //noinspection JSUnusedGlobalSymbols
+        deleteFilter(index) {
             this.filters.splice(index, 1);
             this.onUpdate();
-        };
+        }
 
-        this.addFilter = () => {
+        addFilter() {
             this.filters.push({});
-        };
+        }
 
-        this.reset = () => {
+        //noinspection JSUnusedGlobalSymbols
+        reset() {
             this.filters = [];
             this.phraseFilter = '';
-            $timeout(() => {
+            this._$timeout(() => {
                 this.onUpdate();
             });
-        };
-    }]
+        }
+    }
 };

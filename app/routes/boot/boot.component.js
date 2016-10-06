@@ -1,54 +1,61 @@
 export default {
-    controller: ['$location', '$scope', '$timeout', 'fileHelper', function ($location, $scope, $timeout, fileHelper) {
+    selector: 'boot',
+    templateUrl: 'routes/boot/boot.template.html',
+    controller: class {
+        constructor($location, $scope, $timeout, fileHelper) {
+            this.isReady = false;
+            this.showProgress = false;
+            this.hasErrored = false;
+            this.messages = ['Vérification de la base de données...'];
+            this.downloadProgress = {achieved: 0, total: 0};
+            this._$location = $location;
+            this._$scope = $scope;
+            this._$timeout = $timeout;
+            this._fileHelper = fileHelper;
 
-        this.isReady = false;
-        this.showProgress = false;
-        this.hasErrored = false;
-        this.messages = ['Vérification de la base de données...'];
-        this.downloadProgress = {achieved: 0, total: 0};
+            fileHelper.ensureFolderPathExists().then((message) => {
+                this.messages.push(message);
+                this.ensureDatabaseExists();
+            });
+        }
 
-        fileHelper.ensureFolderPathExists().then((message) => {
-            this.messages.push(message);
-            ensureDatabaseExists();
-        });
 
-        const ensureDatabaseExists = () => {
-            fileHelper.fileExists('works.db').then((exists) => {
+        ensureDatabaseExists() {
+            this._fileHelper.fileExists('works.db').then((exists) => {
                 if (exists) {
                     this.messages.push('Une base de données existe déjà.');
                     this.isReady = true;
-                    $location.path('/search');
+                    this._$location.path('/search');
                 } else {
-                    downloadDatabase();
+                    this.downloadDatabase();
                 }
             });
-        };
+        }
 
-        const downloadDatabase = () => {
+        downloadDatabase() {
             this.messages.push('Aucune base de données n\'a pu être trouvée. Téléchargement en cours...');
             this.showProgress = true;
-            fileHelper.downloadWorksDatabase(
+            this._fileHelper.downloadWorksDatabase(
                 (achieved, total) => {
                     this.downloadProgress.achieved = achieved;
                     this.downloadProgress.total = total;
-                    $scope.$digest();
+                    this._$scope.$digest();
                 }
             ).then(() => {
                 this.showProgress = false;
                 this.messages.push('Téléchargement terminé.');
                 this.isReady = true;
-                start();
+                this.start();
             }, () => {
                 this.messages.push('Échec du téléchargement.');
                 this.showProgress = false;
                 this.hasErrored = true;
             });
-        };
+        }
 
-        const start = () => {
+        start() {
             this.messages.push('Démarrage de l\'application dans 3 secondes...');
-            $timeout(() => $location.path('/search'), 3000);
-        };
-    }],
-    templateUrl: 'routes/boot/boot.template.html'
+            this._$timeout(() => this._$location.path('/search'), 3000);
+        }
+    }
 };

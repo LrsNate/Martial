@@ -10,4 +10,4 @@ function config($routeProvider) {
 
 export default angular.module('myApp.boot', [FileHelper.name, DownloadProgress.name])
     .config(config)
-    .component('boot', BootComponent);
+    .component(BootComponent.selector, BootComponent);
