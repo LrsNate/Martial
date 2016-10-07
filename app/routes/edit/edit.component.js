@@ -10,13 +10,6 @@ export default {
 
             worksDao.getWork(workId).then((work) => {
                 this.work = work;
-                if (work.originId) {
-                    worksDao.getWork(work.originId).then((work) => {
-                        this.originWork = work;
-                        //noinspection JSUnusedGlobalSymbols
-                        this.originReference = work.author + ': ' + work.reference;
-                    });
-                }
             });
         }
 
@@ -25,23 +18,10 @@ export default {
         }
 
         //noinspection JSUnusedGlobalSymbols
-        addVice() {
-            this.editedVice = this.editedVice.trim();
-            if (!this.editedVice || !this.editedVice.length) return;
-            this.work.vices.push(this.editedVice);
-            this.editedVice = '';
-        }
-
-        //noinspection JSUnusedGlobalSymbols
         saveWork() {
             this._worksDao.updateWork(this.work).then(() => {
                 this._$location.path('/search');
             });
-        }
-
-        //noinspection JSUnusedGlobalSymbols
-        deleteVice(index) {
-            this.work.vices.splice(index, 1);
         }
     }
 };
