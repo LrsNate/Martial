@@ -16,8 +16,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li ng-class="{active: $ctrl.route == 'search'}"><a href="#!/search">
-                        <span class="glyphicon glyphicon-search"></span>
-                        Rechercher
+                    <span class="glyphicon glyphicon-search"></span>
+                    Rechercher
+                </a></li>
+                <li ng-class="{active: $ctrl.route == 'add'}"><a href="#!/add">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Ajouter
                 </a></li>
                 <li ng-class="{active: $ctrl.route == 'settings'}"><a href="#!/settings">
                     <span class="glyphicon glyphicon-cog"></span>

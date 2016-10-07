@@ -50,6 +50,14 @@ export default class WorksDaoService {
         });
     }
 
+    insertWork(work) {
+        return this._$q((resolve) => {
+            this._db.insert(work, () => {
+                resolve();
+            });
+        });
+    }
+
     updateWork(work) {
         let id = work._id;
         return this._$q((resolve) => {

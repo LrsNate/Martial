@@ -15,7 +15,8 @@ export default {
         //noinspection JSUnusedGlobalSymbols
         isOtherRoute() {
             return this.route != 'search' &&
-                this.route != 'changelog';
+                this.route != 'changelog' &&
+                this.route != 'add';
         }
     }
 };

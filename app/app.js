@@ -4,6 +4,7 @@ import 'angular-animate';
 import 'angular-sanitize';
 import NavigationBar from './components/navigation-bar';
 import Version from './components/version';
+import Add from './routes/add';
 import Boot from './routes/boot';
 import Changelog from './routes/changelog';
 import Edit from './routes/edit';
@@ -23,6 +24,7 @@ export default angular.module('myApp', [
         'ngSanitize',
         NavigationBar.name,
         Version.name,
+        Add.name,
         Boot.name,
         Changelog.name,
         Edit.name,
