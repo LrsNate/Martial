@@ -102,3 +102,13 @@ footer {
 .gray-text {
     color: gray;
 }
+
+.vices-list {
+    list-style-type: none;
+    padding-left: 0;
+    column-count: 2;
+}
+
+.vices-list li {
+    margin-bottom: 10px;
+}
