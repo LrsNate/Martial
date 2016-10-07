@@ -20,7 +20,7 @@
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.author }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.reference }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">
-                {{ work.latinText || work.frenchText | limitTo: 50 }}...
+                {{ work.latinText || work.frenchText | incipit: 50 }}...
             </td>
             <td>
                 <a type="button"
