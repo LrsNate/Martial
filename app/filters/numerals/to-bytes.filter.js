@@ -1,19 +1,16 @@
 export default () => {
-    let sizes = ['B', 'kB', 'MB', 'GB', 'TB'];
+  const sizes = ['B', 'kB', 'MB', 'GB', 'TB'];
 
-    let floatRound = (number, places) => {
-        //noinspection JSCheckFunctionSignatures,ES6ModulesDependencies
-        return +(Math.round(number + "e+" + places)  + "e-" + places);
-    };
 
-    return (input, decimals) => {
-        for (let i = 0; i < sizes.length; i++) {
-            if (input < 1024) {
-                return floatRound(input, decimals) + sizes[i];
-            } else if (i < sizes.length - 1) {
-                input /= 1024;
-            }
-        }
-        return input + 'TB';
-    };
+  return (input, decimals) => {
+    let size = input;
+    for (let i = 0; i < sizes.length; i += 1) {
+      if (size < 1024) {
+        return size.toFixed(decimals) + sizes[i];
+      } else if (i < sizes.length - 1) {
+        size /= 1024;
+      }
+    }
+    return `${size}TB`;
+  };
 };

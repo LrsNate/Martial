@@ -1,55 +1,53 @@
-'use strict';
-var electron = require('electron');
+const electron = require('electron'); // eslint-disable-line
 // Module to control application life.
-var app = electron.app;
+const app = electron.app;
 // Module to create native browser window.
-var BrowserWindow = electron.BrowserWindow;
+const BrowserWindow = electron.BrowserWindow;
 
-var autoUpdater = electron.autoUpdater;
+const autoUpdater = electron.autoUpdater;
+const appVersion = require('./package.json').version;
 
 if (process.env.NODE_ENV !== 'development') {
-    let appVersion = require('./package.json').version;
-    let updateFeed = 'https://martial-releases.herokuapp.com/update';
-    autoUpdater.setFeedURL(updateFeed + '?version=' + appVersion + '&platform=darwin');
+  const updateFeed = 'https://martial-releases.herokuapp.com/update';
+  autoUpdater.setFeedURL(`${updateFeed}?version=${appVersion}&platform=darwin`);
 
-    setInterval(() => autoUpdater.checkForUpdates(), 1800000);
-    autoUpdater.checkForUpdates();
+  setInterval(() => autoUpdater.checkForUpdates(), 1800000);
+  autoUpdater.checkForUpdates();
 
-    autoUpdater.on('error', (error) => {});
+  autoUpdater.on('error', () => {
+  });
 
-    autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-        electron.dialog.showMessageBox({
-            buttons: ['Ok'],
-            message: 'Nouvelle mise à jour',
-            detail: 'Une nouvelle mise à jour est disponible. Elle sera installée au prochain ' +
-            'démarrage de l\'application.\n\n' +
-            'Nouvelle version: v' + releaseName + '\n' + releaseNotes
-        });
+  autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    electron.dialog.showMessageBox({
+      buttons: ['Ok'],
+      message: 'Nouvelle mise à jour',
+      detail: `Une nouvelle mise à jour est disponible. Elle sera installée au prochain démarrage de l'application.\n\nNouvelle version: v${releaseName}\n${releaseNotes}`,
     });
+  });
 }
 
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-var mainWindow;
+let mainWindow;
 
 function createWindow() {
-    // Create the browser window.
-    mainWindow = new BrowserWindow({width: 850, height: 650});
+  // Create the browser window.
+  mainWindow = new BrowserWindow({ width: 850, height: 650 });
 
-    // and load the index.html of the app.
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
+  // and load the index.html of the app.
+  mainWindow.loadURL(`file://${__dirname}/index.html`);
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools();
 
-    // Emitted when the window is closed.
-    mainWindow.on('closed', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        mainWindow = null;
-    });
+  // Emitted when the window is closed.
+  mainWindow.on('closed', () => {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null;
+  });
 }
 
 // This method will be called when Electron has finished
@@ -58,18 +56,18 @@ function createWindow() {
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    app.quit();
+app.on('window-all-closed', () => {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  app.quit();
 });
 
-app.on('activate', function () {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (mainWindow === null) {
-        createWindow();
-    }
+app.on('activate', () => {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow();
+  }
 });
 
 // In this file you can include the rest of your app's specific main process
