@@ -13,6 +13,9 @@
     <work-editor work="$ctrl.work" ng-if="$ctrl.work"></work-editor>
     <div class="row">
         <div class="col-sm-12 edit-submit">
+            <a type="button" class="btn btn-danger" ng-click="$ctrl.confirmDeleteWork()">
+                Supprimer
+            </a>
             <a type="button" class="btn btn-default" href="#!/search">Annuler</a>
             <a type="button" class="btn btn-success" ng-click="$ctrl.saveWork()">Enregistrer</a>
         </div>

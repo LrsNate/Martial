@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="modal-title" id="modal-title">Supprimer cette oeuvre</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    Cette oeuvre sera supprimée de la base de données.
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Annuler</button>
+    <button class="btn btn-danger" type="button" ng-click="$ctrl.confirm()">
+        <span class="glyphicon glyphicon-trash"></span>
+        Supprimer
+    </button>
+</div>

@@ -1,5 +1,6 @@
 import angular from 'angular';
 import WorkEditor from '../../components/work-editor';
+import ConfirmDeleteWork from '../../components/confirm-delete-work';
 import WorksDao from '../../services/works-dao';
 import EditComponent from './edit.component';
 
@@ -10,6 +11,11 @@ function config($routeProvider) {
 }
 config.$inject = ['$routeProvider'];
 
-export default angular.module('myApp.edit', [WorksDao.name, WorkEditor.name])
+export default angular.module('myApp.edit', [
+  'ui.bootstrap',
+  ConfirmDeleteWork.name,
+  WorksDao.name,
+  WorkEditor.name,
+])
   .config(config)
   .component(EditComponent.selector, EditComponent);

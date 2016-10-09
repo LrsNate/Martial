@@ -71,4 +71,15 @@ export default class WorksDaoService {
       });
     });
   }
+
+  deleteWork(work) {
+    const id = work._id; // eslint-disable-line no-underscore-dangle
+    return this.$q((resolve) => {
+      this.db.remove({ _id: id }, () => {
+        this.db.update({ originId: id }, { $unset: { originId: 1 } }, { multi: true }, () => {
+          resolve();
+        });
+      });
+    });
+  }
 }

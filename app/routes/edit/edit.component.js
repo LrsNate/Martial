@@ -1,9 +1,12 @@
+import ConfirmDeleteWorkComponent from '../../components/confirm-delete-work/confirm-delete-work.component';
+
 export default {
   selector: 'edit',
   templateUrl: 'routes/edit/edit.template.html',
   controller: class {
 
-    constructor($routeParams, $location, worksDao) {
+    constructor($routeParams, $uibModal, $location, worksDao) {
+      this.$uibModal = $uibModal;
       this.$location = $location;
       this.worksDao = worksDao;
       const workId = $routeParams.workId;
@@ -15,11 +18,28 @@ export default {
     }
 
     static get $inject() {
-      return ['$routeParams', '$location', 'worksDao'];
+      return ['$routeParams', '$uibModal', '$location', 'worksDao'];
     }
 
     saveWork() {
       this.worksDao.updateWork(this.work).then(() => {
+        this.$location.path('/search');
+      });
+    }
+
+    confirmDeleteWork() {
+      const modalInstance = this.$uibModal.open({
+        animation: true,
+        component: ConfirmDeleteWorkComponent.selector,
+      });
+
+      modalInstance.result.then(() => {
+        this.deleteWork();
+      });
+    }
+
+    deleteWork() {
+      this.worksDao.deleteWork(this.work).then(() => {
         this.$location.path('/search');
       });
     }
