@@ -1,4 +1,5 @@
 import angular from 'angular';
+import 'angular-ui-bootstrap';
 import WorkEditor from '../../components/work-editor';
 import ConfirmDeleteWork from '../../components/confirm-delete-work';
 import WorksDao from '../../services/works-dao';

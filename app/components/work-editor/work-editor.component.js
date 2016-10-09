@@ -1,3 +1,5 @@
+import WorkSelectorComponent from './work-selector.component';
+
 export default {
   selector: 'workEditor',
   templateUrl: 'components/work-editor/work-editor.template.html',
@@ -6,21 +8,34 @@ export default {
   },
   controller: class {
 
-    constructor(worksDao) {
+    constructor($uibModal, worksDao) {
+      this.$uibModal = $uibModal;
       this.worksDao = worksDao;
       this.editedVice = '';
 
-      if (this.work.originId) {
-        worksDao.getWork(this.work.originId).then((work) => {
-          this.originWork = work;
-          // noinspection JSUnusedGlobalSymbols
-          this.originReference = `${work.author}: ${work.reference}`;
-        });
-      }
+      this.resolveOriginReference();
     }
 
     static get $inject() {
-      return ['worksDao'];
+      return ['$uibModal', 'worksDao'];
+    }
+
+    changeOrigin() {
+      const modalInstance = this.$uibModal.open({
+        animation: true,
+        component: WorkSelectorComponent.selector,
+        windowClass: 'work-selector-modal',
+      });
+
+      modalInstance.result.then((workId) => {
+        this.work.originId = workId;
+        this.resolveOriginReference();
+      });
+    }
+
+    removeOrigin() {
+      this.work.originId = null;
+      this.originReference = '';
     }
 
     addVice() {
@@ -32,6 +47,18 @@ export default {
 
     deleteVice(index) {
       this.work.vices.splice(index, 1);
+    }
+
+    resolveOriginReference() {
+      if (this.work.originId) {
+        this.worksDao.getWork(this.work.originId).then((work) => {
+          this.originWork = work;
+          // noinspection JSUnusedGlobalSymbols
+          this.originReference = `${work.author}: ${work.reference}`;
+        });
+      } else {
+        this.originReference = '';
+      }
     }
   },
 };

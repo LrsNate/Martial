@@ -19,9 +19,23 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="origin-input" class="col-sm-3 control-label">Origine</label>
+            <label class="col-sm-3 control-label">Origine</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="origin-input" ng-model="$ctrl.originReference" disabled/>
+                <div ng-if="$ctrl.work.originId" class="btn-group" role="group">
+                    <a type="button" class="btn btn-danger" ng-click="$ctrl.removeOrigin()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <a type="button" class="btn btn-default" ng-click="$ctrl.changeOrigin()">
+                            <span ng-bind="$ctrl.originReference"></span>
+                        </a>
+                    </a>
+                </div>
+                <div ng-if="!$ctrl.work.originId" class="btn-group" role="group">
+                    <a type="button" class="btn btn-default" ng-click="$ctrl.changeOrigin()">
+                        Sélectionner une oeuvre
+                    </a>
+                </div>
+                <!--<input type="text" class="form-control" id="origin-input" ng-model="$ctrl.originReference" disabled/>-->
+
             </div>
         </div>
         <div class="form-group">
