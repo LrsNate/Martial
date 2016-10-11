@@ -28,11 +28,12 @@
     <div class="row">
         <div class="col-sm-6">
             <h5>Texte latin</h5>
-            <div class="well text-well" ng-bind="$ctrl.work.latinText || $ctrl.referencedWork.latinText"></div>
+            <div class="well text-well" ng-bind-html="$ctrl.work.latinText || $ctrl.referencedWork.latinText | markdown">
+            </div>
         </div>
         <div class="col-sm-6">
             <h5>Texte français</h5>
-            <div class="well text-well" ng-bind="$ctrl.work.frenchText"></div>
+            <div class="well text-well" ng-bind-html="$ctrl.work.frenchText | markdown"></div>
         </div>
     </div>
 </div>
