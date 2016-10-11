@@ -1,5 +1,3 @@
-import { sprintf } from 'sprintf-js';
-
 const _ = require('lodash');
 
 export default class SortHelperService {
@@ -24,8 +22,8 @@ export default class SortHelperService {
     const refPostfix = reference[1].substr(Math.log10(refCore));
 
     return [
-      sprintf('%04d', numeralFirstReference),
-      sprintf('%04d', refCore) + refPostfix,
+      _.padStart(numeralFirstReference, 4, '0'),
+      _.padStart(refCore, 4, '0') + refPostfix,
       _.lowerCase(doc.author === 'Martial' ? 'a' : doc.author),
     ];
   }
