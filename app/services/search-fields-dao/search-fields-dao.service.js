@@ -1,10 +1,12 @@
+const stringIsMatcher = { name: 'est', id: 'is', type: 'string' };
+
 export default {
   fields: [
     {
       name: 'Auteur',
       id: 'author',
       type: 'string',
-      defaultMatcher: { name: 'est', id: 'is', type: 'string' },
+      defaultMatcher: stringIsMatcher,
     },
     {
       name: 'Publication',
@@ -16,13 +18,13 @@ export default {
       name: 'Mètre',
       id: 'meter',
       type: 'string',
-      defaultMatcher: { name: 'est', id: 'is', type: 'string' },
+      defaultMatcher: stringIsMatcher,
     },
     {
       name: 'Strophe',
       id: 'stanza',
       type: 'string',
-      defaultMatcher: { name: 'est', id: 'is', type: 'string' },
+      defaultMatcher: stringIsMatcher,
     },
     {
       name: 'Oeuvre',
@@ -30,9 +32,15 @@ export default {
       type: 'work',
       defaultMatcher: { name: 'imite', id: 'imitates', type: 'work' },
     },
+    {
+      name: 'Destinataire',
+      id: 'addressee',
+      type: 'string',
+      defaultMatcher: stringIsMatcher,
+    },
   ],
   matchers: [
-    { name: 'est', id: 'is', type: 'string' },
+    stringIsMatcher,
     { name: 'n\'est pas', id: 'is_not', type: 'string' },
     { name: 'depuis', id: 'after', type: 'date' },
     { name: 'jusqu\'à', id: 'before', type: 'date' },
