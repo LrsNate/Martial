@@ -16,7 +16,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="work in displayedWorks=($ctrl.works | filter: $ctrl.phraseFilter) | limitTo: 50 track by work._id">
+        <tr dir-paginate="work in displayedWorks=($ctrl.works | filter: $ctrl.phraseFilter) | itemsPerPage: 50 track by work._id">
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.author }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.reference }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">
@@ -35,6 +35,9 @@
         </tbody>
     </table>
     <h5 class="works-status" ng-if="!displayedWorks.length" ng-bind="$ctrl.statusMessage"></h5>
+    <div class="text-center">
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
 </div>
 
 <text-display ng-if="$ctrl.selectedWork"
