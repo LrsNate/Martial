@@ -5,8 +5,8 @@ export default {
   templateUrl: 'routes/changelog/changelog.template.html',
   controller: class {
 
-    static openTrelloBoard() {
-      electron.shell.openExternal('https://trello.com/b/5loodpwW');
+    openProgressBoard() { // eslint-disable-line class-methods-use-this
+      electron.shell.openExternal('https://github.com/LrsNate/Martial/projects/1');
     }
   },
 };
