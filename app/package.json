@@ -2,7 +2,7 @@
   "name": "martial",
   "author": "Antoine Lafouasse",
   "private": true,
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A database interface visualising work imitations.",
   "repository": "https://github.com/LrsNate/Martial",
   "license": "MIT",
