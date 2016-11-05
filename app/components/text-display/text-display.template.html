@@ -1,10 +1,10 @@
-<div class="text-display-header container-fluid" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
-    <div class="text-display-caret">
+<div class="text-display-header container-fluid">
+    <div class="text-display-caret" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
         <span class="glyphicon"
-              ng-class="{'glyphicon-chevron-down': !$ctrl.isCollapsed, 'glyphicon-chevron-up': $ctrl.isCollapsed}">
+              ng-class="$ctrl.isCollapsed && 'glyphicon-chevron-up' || 'glyphicon-chevron-down'">
         </span>
     </div>
-    <p class="text-display-reference">
+    <p class="text-display-reference" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
         <strong ng-bind="$ctrl.work.author"></strong>
         <span ng-if="$ctrl.work.reference">
             - <span ng-bind="$ctrl.work.reference"></span>
@@ -20,20 +20,47 @@
                 - <span ng-bind="$ctrl.referencedWork.reference"></span></span>)
         </small>
     </p>
+    <div>
+        <a type="buton" 
+            class="btn btn-sm btn-warning" 
+            ng-bind="$ctrl.display === 'meta' && 'Texte' || 'Attributs'"
+            ng-click="$ctrl.toggleDisplay()">
+            </a>
+    </div>
     <div class="text-display-caret" ng-click="$ctrl.onDelete()">
         <span class="glyphicon glyphicon-remove"></span>
     </div>
 </div>
 <div class="text-display container-fluid" uib-collapse="$ctrl.isCollapsed">
-    <div class="row">
+    <div class="row" ng-show="$ctrl.display === 'text'">
         <div class="col-sm-6">
-            <h5>Texte latin</h5>
+            <h4>Texte latin</h4>
             <div class="well text-well" ng-bind-html="$ctrl.work.latinText || $ctrl.referencedWork.latinText | markdown">
             </div>
         </div>
         <div class="col-sm-6">
-            <h5>Texte français</h5>
+            <h4>Texte français</h4>
             <div class="well text-well" ng-bind-html="$ctrl.work.frenchText | markdown"></div>
+        </div>
+    </div>
+    <div ng-show="$ctrl.display === 'meta'">
+        <h4>Attributs</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <work-attribute name="Auteur" value="$ctrl.work.author"></work-attribute>
+                <work-attribute name="Titre" value="$ctrl.work.title"></work-attribute>
+                <work-attribute name="Référence" value="$ctrl.work.reference"></work-attribute>
+                <work-attribute ng-if="$ctrl.referencedWork" name="Origine" 
+                    value="$ctrl.referencedWork.author + ', ' + $ctrl.referencedWork.reference"></work-attribute>
+                <work-attribute name="Destinataire" value="$ctrl.work.addressee"></work-attribute>
+                <work-attribute name="Date" value="$ctrl.work.date"></work-attribute>
+            </div>
+            <div class="col-sm-6">
+                <work-attribute name="Mètre" value="$ctrl.work.meter"></work-attribute>
+                <work-attribute name="Strophe" value="$ctrl.work.stanza"></work-attribute>
+                <work-attribute name="Vices" value="$ctrl.work.vices"></work-attribute>
+                <work-attribute name="Notes" value="$ctrl.work.notes"></work-attribute>
+            </div>
         </div>
     </div>
 </div>

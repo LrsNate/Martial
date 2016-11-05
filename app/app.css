@@ -116,3 +116,12 @@ footer {
 .work-selector-modal .modal-dialog {
     width: 90%;
 }
+
+.work-attribute-label {
+    font-weight: bold;
+}
+
+.empty-text {
+    color: lightgray;
+    font-style: italic;
+}
