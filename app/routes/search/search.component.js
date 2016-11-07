@@ -5,7 +5,7 @@ export default {
   templateUrl: 'routes/search/search.template.html',
   controller: class {
 
-    constructor($location, worksDao, searchHelper) {
+    constructor($location, $scope, worksDao, searchHelper) {
       this.fullWorks = [];
       this.works = [];
       this.filters = [];
@@ -26,10 +26,12 @@ export default {
           if (work.originId) this.hasReferences[work.originId] = true;
         });
       });
+
+      $scope.$watch(() => this.phraseFilter, () => this.refreshFilters());
     }
 
     static get $inject() {
-      return ['$location', 'worksDao', 'searchHelper'];
+      return ['$location', '$scope', 'worksDao', 'searchHelper'];
     }
 
     setSelectedWork(work) {
@@ -56,7 +58,7 @@ export default {
     }
 
     refreshFilters() {
-      this.searchHelper.applyFilters(this.filters, this.fullWorks)
+      this.searchHelper.applyFilters(this.filters, this.phraseFilter, this.fullWorks)
         .then((works) => {
           this.works = works;
           this.displayedWorks = works.slice(0, 30);
