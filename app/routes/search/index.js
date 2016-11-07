@@ -1,4 +1,5 @@
 import angular from 'angular';
+import ngInfiniteScroll from 'ng-infinite-scroll';
 import SearchBox from '../../components/search-box';
 import TextDisplay from '../../components/text-display';
 import SearchHelper from '../../services/search-helper';
@@ -19,6 +20,7 @@ export default angular.module('myApp.search', [
   SearchHelper.name,
   WorksDao.name,
   Strings.name,
+  ngInfiniteScroll,
 ])
   .config(config)
   .component(SearchComponent.selector, SearchComponent);

@@ -4,9 +4,9 @@
 
     <hr/>
 
-    <h5>{{ displayedWorks.length }} résultats</h5>
+    <h5>{{ $ctrl.displayedWorks.length }} résultats</h5>
 
-    <table class="table table-striped" id="search-results">
+    <table class="table table-striped" id="search-results" infinite-scroll="$ctrl.onInfiniteScroll()">
         <thead>
         <tr>
             <th>Auteur</th>
@@ -16,7 +16,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="work in displayedWorks=($ctrl.works | filter: $ctrl.phraseFilter) | limitTo: 50 track by work._id">
+        <tr ng-repeat="work in $ctrl.displayedWorks track by work._id">
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.author }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.reference }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">
