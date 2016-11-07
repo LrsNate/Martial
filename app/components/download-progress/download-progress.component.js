@@ -1,7 +1,7 @@
 export default {
   bindings: {
-    achieved: '=',
-    total: '=',
+    achieved: '<',
+    total: '<',
   },
   templateUrl: 'components/download-progress/download-progress.template.html',
   controller: class {

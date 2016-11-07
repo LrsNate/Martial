@@ -10,7 +10,6 @@ export default {
       this.works = [];
       this.filters = [];
       this.phraseFilter = '';
-      this.statusMessage = 'Chargement des épigrammes...';
       this.selectedWork = null;
       this.hasReferences = {};
       this.$location = $location;
@@ -20,7 +19,6 @@ export default {
         this.fullWorks = works;
         this.works = works;
         this.displayedWorks = works.slice(0, 30);
-        this.statusMessage = 'Aucune épigramme n\'a pu être trouvée avec ces critères';
 
         _.each(works, (work) => {
           if (work.originId) this.hasReferences[work.originId] = true;
@@ -38,11 +36,13 @@ export default {
       this.selectedWork = work;
     }
 
-    edit(work) {
+    edit($event, work) {
+      $event.stopPropagation();
       this.$location.path(`/edit/${work._id}`); // eslint-disable-line no-underscore-dangle
     }
 
-    filterByReference(work) {
+    filterByReference($event, work) {
+      $event.stopPropagation();
       this.filters = [
         {
           field: { name: 'Oeuvre', id: 'work', type: 'work' },

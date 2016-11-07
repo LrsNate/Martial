@@ -2,7 +2,7 @@ export default {
   templateUrl: 'components/text-display/text-display.template.html',
   selector: 'textDisplay',
   bindings: {
-    work: '=',
+    work: '<',
     onDelete: '&',
   },
   controller: class {
