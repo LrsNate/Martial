@@ -1,4 +1,3 @@
-import 'angular-utils-pagination';
 import angular from 'angular';
 import SearchBox from '../../components/search-box';
 import TextDisplay from '../../components/text-display';
@@ -14,14 +13,12 @@ function config($routeProvider) {
 }
 config.$inject = ['$routeProvider'];
 
-
 export default angular.module('myApp.search', [
   SearchBox.name,
   TextDisplay.name,
   SearchHelper.name,
   WorksDao.name,
   Strings.name,
-  'angularUtils.directives.dirPagination',
 ])
   .config(config)
   .component(SearchComponent.selector, SearchComponent);

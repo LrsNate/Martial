@@ -16,7 +16,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr dir-paginate="work in displayedWorks=($ctrl.works | filter: $ctrl.phraseFilter) | itemsPerPage: 50 track by work._id">
+        <tr ng-repeat="work in displayedWorks=($ctrl.works | filter: $ctrl.phraseFilter) | limitTo: 50 track by work._id">
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.author }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.reference }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">

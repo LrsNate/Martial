@@ -13,7 +13,6 @@
     "angular-route": "^1.5.8",
     "angular-sanitize": "^1.5.8",
     "angular-ui-bootstrap": "^2.1.4",
-    "angular-utils-pagination": "^0.11.1",
     "bootstrap": "^3.3.7",
     "lodash": "^4.16.2",
     "mkdirp": "^0.5.1",
