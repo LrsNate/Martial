@@ -1,5 +1,5 @@
-import 'angular-utils-pagination';
 import angular from 'angular';
+import ngInfiniteScroll from 'ng-infinite-scroll';
 import SearchBox from '../../components/search-box';
 import TextDisplay from '../../components/text-display';
 import SearchHelper from '../../services/search-helper';
@@ -14,14 +14,13 @@ function config($routeProvider) {
 }
 config.$inject = ['$routeProvider'];
 
-
 export default angular.module('myApp.search', [
   SearchBox.name,
   TextDisplay.name,
   SearchHelper.name,
   WorksDao.name,
   Strings.name,
-  'angularUtils.directives.dirPagination',
+  ngInfiniteScroll,
 ])
   .config(config)
   .component(SearchComponent.selector, SearchComponent);

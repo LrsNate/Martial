@@ -2,9 +2,10 @@ const _ = require('lodash');
 
 export default class SearchHelperService {
 
-  constructor($q, $timeout) {
+  constructor($q, $timeout, $filter) {
     this.$q = $q;
     this.$timeout = $timeout;
+    this.$filter = $filter;
 
     // noinspection JSUnusedLocalSymbols
     this.matchers = {
@@ -34,10 +35,10 @@ export default class SearchHelperService {
   }
 
   static get $inject() {
-    return ['$q', '$timeout'];
+    return ['$q', '$timeout', '$filter'];
   }
 
-  applyFilters(filters, fullWorks) {
+  applyFilters(filters, phraseFilter, fullWorks) {
     return this.$q((resolve) => {
       this.$timeout(() => {
         let works = fullWorks;
@@ -51,6 +52,7 @@ export default class SearchHelperService {
           });
         });
 
+        works = this.$filter('filter')(works, phraseFilter);
         resolve(works);
       });
     });

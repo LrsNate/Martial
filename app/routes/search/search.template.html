@@ -4,9 +4,9 @@
 
     <hr/>
 
-    <h5>{{ displayedWorks.length }} résultats</h5>
+    <h5>{{ $ctrl.works.length }} résultats</h5>
 
-    <table class="table table-striped" id="search-results">
+    <table class="table table-striped" id="search-results" infinite-scroll="$ctrl.onInfiniteScroll()">
         <thead>
         <tr>
             <th>Auteur</th>
@@ -16,7 +16,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr dir-paginate="work in displayedWorks=($ctrl.works | filter: $ctrl.phraseFilter) | itemsPerPage: 50 track by work._id">
+        <tr ng-repeat="work in $ctrl.displayedWorks track by work._id">
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.author }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.reference }}</td>
             <td ng-click="$ctrl.setSelectedWork(work)">
@@ -34,10 +34,7 @@
         </tr>
         </tbody>
     </table>
-    <h5 class="works-status" ng-if="!displayedWorks.length" ng-bind="$ctrl.statusMessage"></h5>
-    <div class="text-center">
-        <dir-pagination-controls></dir-pagination-controls>
-    </div>
+    <h5 class="works-status" ng-if="!$ctrl.works.length" ng-bind="$ctrl.statusMessage"></h5>
 </div>
 
 <text-display ng-if="$ctrl.selectedWork"
