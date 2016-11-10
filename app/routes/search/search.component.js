@@ -67,9 +67,10 @@ export default {
 
     onInfiniteScroll() {
       if (!this.displayedWorks) return;
-      const last = this.displayedWorks.length - 1;
-      for (let i = 1; i <= 10; i += 1) {
-        this.displayedWorks.push(this.works[last + i]);
+      const start = this.displayedWorks.length - 1;
+      const lastIndex = Math.min(start + 10, this.works.length - 1);
+      for (let i = start + 1; i <= lastIndex; i += 1) {
+        this.displayedWorks.push(this.works[i]);
       }
     }
   },
