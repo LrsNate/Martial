@@ -125,3 +125,12 @@ footer {
     color: lightgray;
     font-style: italic;
 }
+
+.text-display-selector {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+ul.dropdown-menu li {
+  cursor: pointer;
+}
