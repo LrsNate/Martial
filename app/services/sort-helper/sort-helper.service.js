@@ -35,7 +35,7 @@ export default class SortHelperService {
     if (doc.originId) {
       const originWork = _.find(
         docs,
-        o => doc.originId === o._id // eslint-disable-line no-underscore-dangle
+        o => doc.originId === o._id, // eslint-disable-line no-underscore-dangle
       );
       if (originWork.author === 'Martial') {
         return originWork.reference;

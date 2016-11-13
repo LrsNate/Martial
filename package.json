@@ -3,14 +3,14 @@
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
-    "electron": "^1.4.3",
-    "electron-builder": "^7.11.4",
-    "eslint": "^3.7.1",
-    "eslint-config-airbnb": "^12.0.0",
+    "electron": "^1.4.6",
+    "electron-builder": "^8.5.3",
+    "eslint": "^3.10.0",
+    "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-angular": "^1.4.1",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.5.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.1",
+    "eslint-plugin-react": "^6.6.0",
     "json-loader": "^0.5.4",
     "pre-commit": "^1.1.3",
     "webpack": "^1.13.2"
@@ -31,5 +31,8 @@
   "build": {
     "appId": "fr.nate.martial",
     "category": "public.app-category.education"
+  },
+  "dependencies": {
+    "eslint-plugin-jsx-a11y": "^2.2.3"
   }
 }

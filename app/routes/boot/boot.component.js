@@ -45,7 +45,7 @@ export default {
           this.downloadProgress.achieved = achieved;
           this.downloadProgress.total = total;
           this.$scope.$digest();
-        }
+        },
       ).then(() => {
         this.showProgress = false;
         this.messages.push('Téléchargement terminé.');

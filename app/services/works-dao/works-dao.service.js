@@ -49,7 +49,7 @@ export default class WorksDaoService {
               return null;
             })
             .sortedUniq()
-            .value()
+            .value(),
         );
       });
     });
