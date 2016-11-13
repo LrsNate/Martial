@@ -1,0 +1,10 @@
+<div class="btn-group text-display-selector" uib-dropdown>
+    <a class="btn btn-default btn-block" type="button" uib-dropdown-toggle>
+        <span ng-bind="$ctrl.activeVersion.name"></span>
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+        <li role="menuitem" ng-repeat="version in $ctrl.availableVersions"><a ng-click="$ctrl.setVersion(version)">{{ ::version.name }}</a></li>
+    </ul>
+</div>
+<div class="well text-well" ng-bind-html="$ctrl.text | markdown"></div>

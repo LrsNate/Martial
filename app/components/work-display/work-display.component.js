@@ -1,6 +1,6 @@
 export default {
-  templateUrl: 'components/text-display/text-display.template.html',
-  selector: 'textDisplay',
+  templateUrl: 'components/work-display/work-display.template.html',
+  selector: 'workDisplay',
   bindings: {
     work: '=',
     onDelete: '&',
@@ -9,7 +9,7 @@ export default {
 
     constructor($scope, worksDao) {
       this.isCollapsed = true;
-      this.referencedWork = null;
+      this.referenceWork = null;
       this.worksDao = worksDao;
       this.display = 'text';
       $scope.$watch(() => this.work, () => this.init());
@@ -22,10 +22,10 @@ export default {
     init() {
       if (this.work.originId) {
         this.worksDao.getWork(this.work.originId).then((doc) => {
-          this.referencedWork = doc;
+          this.referenceWork = doc;
         });
       } else {
-        this.referencedWork = null;
+        this.referenceWork = null;
       }
       this.isCollapsed = false;
       this.display = 'text';
