@@ -1,6 +1,6 @@
 export default {
   selector: 'workAttribute',
-  templateUrl: 'components/text-display/work-attribute.template.html',
+  templateUrl: 'components/work-display/work-attribute.template.html',
   bindings: {
     name: '@',
     value: '<',

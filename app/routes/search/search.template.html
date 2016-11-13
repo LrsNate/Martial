@@ -37,7 +37,7 @@
     <h5 class="works-status" ng-if="!$ctrl.works.length" ng-bind="$ctrl.statusMessage"></h5>
 </div>
 
-<text-display ng-if="$ctrl.selectedWork"
+<work-display ng-if="$ctrl.selectedWork"
               work="$ctrl.selectedWork"
               on-delete="$ctrl.selectedWork = null">
-</text-display>
+</work-display>

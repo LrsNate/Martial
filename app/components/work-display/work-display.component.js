@@ -1,6 +1,6 @@
 export default {
-  templateUrl: 'components/text-display/text-display.template.html',
-  selector: 'textDisplay',
+  templateUrl: 'components/work-display/work-display.template.html',
+  selector: 'workDisplay',
   bindings: {
     work: '=',
     onDelete: '&',
