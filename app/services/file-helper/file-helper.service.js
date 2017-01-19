@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as http from 'http';
+import * as https from 'https';
 import * as path from 'path';
 import mkdirp from 'mkdirp';
 import osenv from 'osenv';
@@ -49,7 +49,7 @@ export default class FileHelperService {
   }
 
   downloadWorksDatabase(progress) {
-    return this.downloadFile('http://lrsnate.fr/assets/resources/works.db', progress);
+    return this.downloadFile('https://s3-eu-west-1.amazonaws.com/martial-db-versions/works.db', progress);
   }
 
   downloadFile(fileUrl, progress) {
@@ -59,7 +59,7 @@ export default class FileHelperService {
       const fileHandle = fs.createWriteStream(filePath);
 
 
-      http.get(fileUrl, (response) => {
+      https.get(fileUrl, (response) => {
         const total = response.headers['content-length'];
         let achieved = 0;
         response.pipe(fileHandle);
