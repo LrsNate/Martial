@@ -3,7 +3,7 @@ export default {
   templateUrl: 'routes/boot/boot.template.html',
   controller: class {
 
-    constructor($location, $scope, $timeout, fileHelper) {
+    constructor($location, $scope, $timeout, databaseHelper, fileHelper) {
       this.isReady = false;
       this.showProgress = false;
       this.hasErrored = false;
@@ -12,6 +12,7 @@ export default {
       this.$location = $location;
       this.$scope = $scope;
       this.$timeout = $timeout;
+      this.databaseHelper = databaseHelper;
       this.fileHelper = fileHelper;
 
       fileHelper.ensureFolderPathExists().then((message) => {
@@ -21,7 +22,7 @@ export default {
     }
 
     static get $inject() {
-      return ['$location', '$scope', '$timeout', 'fileHelper'];
+      return ['$location', '$scope', '$timeout', 'databaseHelper', 'fileHelper'];
     }
 
 
@@ -40,21 +41,25 @@ export default {
     downloadDatabase() {
       this.messages.push('Aucune base de données n\'a pu être trouvée. Téléchargement en cours...');
       this.showProgress = true;
-      this.fileHelper.downloadWorksDatabase(
-        (achieved, total) => {
+      this.messages.push('Recherche de la dernière mise à jour de la base de données...');
+      this.databaseHelper.getLatestVersion().then((version) => {
+        this.messages.push(`Dernière version en date : ${version.id}`);
+        this.messages.push('Téléchargement en cours...');
+        this.databaseHelper.downloadVersion(version.id, (achieved, total) => {
+          this.downloadProgress.inProgress = true;
+          this.downloadProgress.showProgress = true;
           this.downloadProgress.achieved = achieved;
           this.downloadProgress.total = total;
           this.$scope.$digest();
-        },
-      ).then(() => {
-        this.showProgress = false;
-        this.messages.push('Téléchargement terminé.');
-        this.isReady = true;
-        this.start();
-      }, () => {
-        this.messages.push('Échec du téléchargement.');
-        this.showProgress = false;
-        this.hasErrored = true;
+        }).then(() => {
+          this.messages.push('Téléchargement terminé.');
+          this.isReady = true;
+          this.start();
+        }, () => {
+          this.showProgress = false;
+          this.messages.push('Échec du téléchargement.');
+          this.hasErrored = true;
+        });
       });
     }
 

@@ -11,9 +11,11 @@
 
     <p>Cette action efface la base de données locale et la remplace par la base de référence sur Internet.
     <strong>Tout changement sera perdu.</strong></p>
-    <p ng-bind="$ctrl.downloadStatus"></p>
+    <ul>
+        <li ng-repeat="message in $ctrl.downloadStatus" ng-bind="message"></li>
+    </ul>
     <download-progress
-            ng-if="$ctrl.downloadProgress.inProgress"
+            ng-if="$ctrl.downloadProgress.showProgress"
             achieved="$ctrl.downloadProgress.achieved"
             total="$ctrl.downloadProgress.total">
     </download-progress>

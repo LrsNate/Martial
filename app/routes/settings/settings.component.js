@@ -3,32 +3,39 @@ export default {
   templateUrl: 'routes/settings/settings.template.html',
   controller: class {
 
-    constructor(fileHelper, worksDao, $scope) {
-      this.fileHelper = fileHelper;
+    constructor(databaseHelper, worksDao, $scope) {
+      this.databaseHelper = databaseHelper;
       this.worksDao = worksDao;
       this.$scope = $scope;
-      this.downloadProgress = { inProgress: false, achieved: 0, total: 0 };
-      this.downloadStatus = '';
+      this.downloadProgress = { inProgress: false, showProgress: false, achieved: 0, total: 0 };
+      this.downloadStatus = [];
     }
 
     static get $inject() {
-      return ['fileHelper', 'worksDao', '$scope'];
+      return ['databaseHelper', 'worksDao', '$scope'];
     }
 
     downloadDatabase() {
-      this.fileHelper.downloadWorksDatabase((achieved, total) => {
-        this.downloadStatus = 'Téléchargement en cours...';
-        this.downloadProgress.inProgress = true;
-        this.downloadProgress.achieved = achieved;
-        this.downloadProgress.total = total;
-        this.$scope.$digest();
-      }).then(() => {
-        this.downloadProgress.inProgress = false;
-        this.downloadStatus = 'Téléchargement terminé.';
-        this.worksDao.init();
-      }, () => {
-        this.downloadProgress.inProgress = false;
-        this.downloadStatus = 'Échec du téléchargement.';
+      this.downloadProgress.inProgress = false;
+      this.downloadStatus = ['Recherche de la dernière mise à jour de la base de données...'];
+      this.databaseHelper.getLatestVersion().then((version) => {
+        this.downloadStatus.push(`Dernière version en date : ${version.id}`);
+        this.downloadStatus.push('Téléchargement en cours...');
+        this.databaseHelper.downloadVersion(version.id, (achieved, total) => {
+          this.downloadProgress.inProgress = true;
+          this.downloadProgress.showProgress = true;
+          this.downloadProgress.achieved = achieved;
+          this.downloadProgress.total = total;
+          this.$scope.$digest();
+        }).then(() => {
+          this.downloadProgress.inProgress = false;
+          this.downloadStatus.push('Téléchargement terminé.');
+          this.worksDao.init();
+        }, () => {
+          this.downloadProgress.inProgress = false;
+          this.downloadProgress.showProgress = false;
+          this.downloadStatus.push('Échec du téléchargement.');
+        });
       });
     }
   },

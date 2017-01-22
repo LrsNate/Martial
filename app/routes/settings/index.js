@@ -1,6 +1,6 @@
 import angular from 'angular';
+import DatabaseHelper from '../../services/database-helper';
 import DownloadProgress from '../../components/download-progress';
-import FileHelper from '../../services/file-helper';
 import SettingsComponent from './settings.component';
 
 function config($routeProvider) {
@@ -11,7 +11,7 @@ function config($routeProvider) {
 config.$inject = ['$routeProvider'];
 
 export default angular.module('myApp.settings', [
-  FileHelper.name,
+  DatabaseHelper.name,
   DownloadProgress.name,
 ])
   .config(config)
