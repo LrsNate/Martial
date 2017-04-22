@@ -6,7 +6,7 @@ export default {
   controller: class {
 
     openProgressBoard() { // eslint-disable-line class-methods-use-this
-      electron.shell.openExternal('https://github.com/LrsNate/Martial/projects/1');
+      electron.shell.openExternal('https://github.com/LrsNate/Martial/issues');
     }
   },
 };
