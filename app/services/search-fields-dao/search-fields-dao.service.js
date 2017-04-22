@@ -9,6 +9,12 @@ export default {
       defaultMatcher: stringIsMatcher,
     },
     {
+      name: 'Tags',
+      id: 'tags',
+      type: 'list',
+      defaultMatcher: { name: 'contient', id: 'contains', type: 'list' },
+    },
+    {
       name: 'Publication',
       id: 'date_published',
       type: 'date',
@@ -25,6 +31,12 @@ export default {
       id: 'stanza',
       type: 'string',
       defaultMatcher: stringIsMatcher,
+    },
+    {
+      name: 'Vices',
+      id: 'vices',
+      type: 'list',
+      defaultMatcher: { name: 'contient', id: 'contains', type: 'list' },
     },
     {
       name: 'Oeuvre',
@@ -45,5 +57,6 @@ export default {
     { name: 'depuis', id: 'after', type: 'date' },
     { name: 'jusqu\'à', id: 'before', type: 'date' },
     { name: 'imite', id: 'imitates', type: 'work' },
+    { name: 'contient', id: 'contains', type: 'list' },
   ],
 };

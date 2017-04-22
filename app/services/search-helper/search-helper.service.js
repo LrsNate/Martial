@@ -30,6 +30,11 @@ export default class SearchHelperService {
             work.originId === term.id;
         },
       },
+      list: {
+        contains(work, field, term) {
+          return _.includes(work[field], term.id);
+        },
+      },
     };
   }
 

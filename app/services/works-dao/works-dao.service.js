@@ -44,6 +44,7 @@ export default class WorksDaoService {
       this.db.find({}, (err, docs) => {
         resolve(_(docs)
             .map(doc => doc[fieldName])
+            .flatten()
             .sortBy((term) => {
               if (term) return term.toLowerCase();
               return null;
