@@ -6,7 +6,7 @@ export default {
     constructor($location, worksDao) {
       this.$location = $location;
       this.worksDao = worksDao;
-      this.work = { vices: [] };
+      this.work = { vices: [], tags: [] };
     }
 
     static get $inject() {

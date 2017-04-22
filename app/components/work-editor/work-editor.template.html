@@ -62,31 +62,8 @@
                 <input type="text" class="form-control" id="stanza-input" ng-model="$ctrl.work.stanza"/>
             </div>
         </div>
-        <div class="form-group">
-            <label for="vice-input" class="col-sm-3 control-label">Vices</label>
-            <div class="col-sm-9">
-                <form ng-submit="$ctrl.addVice()">
-                    <div class="input-group vice-input">
-                        <input type="text" class="form-control" id="vice-input" ng-model="$ctrl.editedVice" placeholder="Ajouter un vice" />
-                        <span class="input-group-btn">
-                                <a role="button" class="btn btn-success" ng-click="$ctrl.addVice()">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                            </span>
-                    </div>
-                </form>
-                <div>
-                    <ul class="vices-list">
-                        <li ng-repeat="vice in $ctrl.work.vices track by $index">
-                            <a type="button" class="btn btn-xs btn-danger" ng-click="$ctrl.deleteVice($index)">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-                            <span ng-bind="vice"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <list-input elements="$ctrl.work.vices" placeholder="Ajouter un vice" label="Vices"></list-input>
+        <list-input elements="$ctrl.work.tags" placeholder="Ajouter un tag" label="Tags"></list-input>
     </div>
 </div>
 <div class="row">

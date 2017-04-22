@@ -2,6 +2,7 @@ import angular from 'angular';
 import 'angular-ui-bootstrap';
 import SearchBox from '../search-box';
 import WorksDao from '../../services/works-dao';
+import ListInputComponent from './list-input.component';
 import WorkEditorComponent from './work-editor.component';
 import WorkSelectorComponent from './work-selector.component';
 
@@ -10,4 +11,5 @@ export default angular.module('myApp.workEditor', [
   WorksDao.name,
 ])
   .component(WorkEditorComponent.selector, WorkEditorComponent)
-  .component(WorkSelectorComponent.selector, WorkSelectorComponent);
+  .component(WorkSelectorComponent.selector, WorkSelectorComponent)
+  .component(ListInputComponent.selector, ListInputComponent);
