@@ -2,10 +2,9 @@ const _ = require('lodash');
 
 export default class SearchHelperService {
 
-  constructor($q, $timeout, $filter) {
+  constructor($q, $timeout) {
     this.$q = $q;
     this.$timeout = $timeout;
-    this.$filter = $filter;
 
     // noinspection JSUnusedLocalSymbols
     this.matchers = {
@@ -52,9 +51,22 @@ export default class SearchHelperService {
           });
         });
 
-        works = this.$filter('filter')(works, phraseFilter);
+        const words = phraseFilter.split(/\s+/);
+        works = _.filter(works, work => _.every(words,
+            word => SearchHelperService.filterByWord(work, word)));
         resolve(works);
       });
+    });
+  }
+
+  static filterByWord(work, word) {
+    return _.some(work, (value) => {
+      if (_.isObject(value) && SearchHelperService.filterByWord(value, word)) {
+        return true;
+      } else if (!_.isString(value)) {
+        return false;
+      }
+      return value.includes(word);
     });
   }
 }
