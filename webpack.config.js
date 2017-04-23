@@ -1,5 +1,3 @@
-const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
-
 module.exports = {
   entry: './app/app.js',
   output: {
@@ -8,11 +6,17 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.json$/, loader: 'json' },
+      { test: /\.json$/, loader: 'json-loader' },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015'],
         },
@@ -25,7 +29,4 @@ module.exports = {
     http: 'empty',
     path: 'empty',
   },
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-  ],
 };
