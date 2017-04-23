@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default {
   selector: 'workAttribute',
   templateUrl: 'components/work-display/work-attribute.template.html',
@@ -5,5 +7,11 @@ export default {
     name: '@',
     value: '<',
   },
-  controller: class {},
+  controller: class {
+    constructor() {
+      if (_.isArray(this.value)) {
+        this.value = this.value.join(', ');
+      }
+    }
+  },
 };
