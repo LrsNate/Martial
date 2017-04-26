@@ -1,0 +1,24 @@
+{
+  "name": "fourmi",
+  "author": "Antoine Lafouasse",
+  "private": true,
+  "version": "2.0.0",
+  "description": "A database interface visualising work imitations.",
+  "repository": "https://github.com/LrsNate/Martial",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/animations": "^4.0.3",
+    "@angular/common": "^4.0.3",
+    "@angular/compiler": "^4.0.3",
+    "@angular/core": "^4.0.3",
+    "@angular/forms": "^4.0.3",
+    "@angular/http": "^4.0.3",
+    "@angular/platform-browser": "^4.0.3",
+    "@angular/platform-browser-dynamic": "^4.0.3",
+    "@angular/router": "^4.0.3",
+    "@angular/upgrade": "^4.0.3",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.3.0",
+    "zone.js": "^0.8.8"
+  }
+}
