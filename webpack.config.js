@@ -1,7 +1,9 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
@@ -10,12 +12,25 @@ module.exports = {
     main: './src/main.ts',
   },
   output: {
-    path: `${__dirname}/dist`,
+    path: root('dist'),
     filename: '[name].js',
   },
   module: {
     loaders: [
       { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.html$/, loader: 'raw-loader' },
+      {
+        test: /\.css$/,
+        exclude: root('src', 'app'),
+        loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader']})
+      },
+      { test: /\.css$/, include: root('src', 'app'), loader: 'raw-loader' },
+      {
+        test: /\.(scss|sass)$/,
+        exclude: root('src', 'app'),
+        loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader']})
+      },
+      { test: /\.(scss|sass)$/, exclude: root('src', 'style'), loader: 'raw-loader!sass-loader' },
       {
         test: /\.ts$/,
         loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
@@ -24,7 +39,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
   },
   target: 'electron-renderer',
   node: {
@@ -57,7 +72,13 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+    new ExtractTextPlugin({ filename: 'css/[name].css' })
   ],
   devtool: 'inline-source-map',
 };
+
+function root(args) {
+  args = Array.prototype.slice.call(arguments, 0);
+  return path.join.apply(path, [__dirname].concat(args));
+}

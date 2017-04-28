@@ -1,4 +1,4 @@
-const electron = require('electron'); // eslint-disable-line
+const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -7,7 +7,7 @@ const BrowserWindow = electron.BrowserWindow;
 const autoUpdater = electron.autoUpdater;
 const appVersion = require('./package.json').version;
 
-if (process.env.NODE_ENV !== 'development') {
+if (false && process.env.NODE_ENV !== 'development') {
   const updateFeed = 'https://martial-releases.herokuapp.com/update';
   autoUpdater.setFeedURL(`${updateFeed}?version=${appVersion}&platform=darwin`);
 
@@ -33,7 +33,7 @@ let mainWindow;
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 850, height: 650 });
+  mainWindow = new BrowserWindow({ width: 1000, height: 700 });
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
