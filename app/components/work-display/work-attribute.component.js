@@ -11,7 +11,7 @@ export default {
     value: '<',
   },
   controller: class {
-    constructor() {
+    $onInit() {
       if (_.isArray(this.value)) {
         this.value = this.value.join(', ');
       }
