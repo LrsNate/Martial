@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import template from './text-display.template.html';
+import './text-display.style.scss';
 
 export default {
   selector: 'textDisplay',
