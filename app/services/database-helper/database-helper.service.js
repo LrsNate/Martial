@@ -12,7 +12,7 @@ export default class DatabaseHelperService {
     return ['$q', 'fileHelper'];
   }
 
-  getLatestVersion() { // eslint-disable-line
+  getLatestVersion() {
     const versionsUrl = 'https://qlbxt69zv1.execute-api.eu-west-1.amazonaws.com/prod/GetLatestVersion';
     return this.$q((resolve, reject) => {
       https.get(versionsUrl, (response) => {

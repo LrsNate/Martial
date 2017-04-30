@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "ajv": "^5.0.4-beta.3",
     "asar": "^0.13.0",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",

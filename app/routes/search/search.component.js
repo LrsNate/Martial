@@ -41,7 +41,7 @@ export default {
     }
 
     edit(work) {
-      this.$location.path(`/edit/${work._id}`); // eslint-disable-line no-underscore-dangle
+      this.$location.path(`/edit/${work._id}`);
     }
 
     filterByReference(work) {
@@ -51,7 +51,7 @@ export default {
           matcher: { name: 'imite', id: 'imitates', type: 'work' },
           term: {
             name: `${work.author}: ${work.reference}`,
-            id: work._id, // eslint-disable-line no-underscore-dangle
+            id: work._id,
           },
         },
       ];

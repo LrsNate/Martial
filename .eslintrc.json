@@ -3,5 +3,8 @@
   "plugins": [
     "import",
     "angular"
-  ]
+  ],
+  "rules": {
+    "no-underscore-dangle": "off"
+  }
 }

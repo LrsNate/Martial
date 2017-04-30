@@ -37,7 +37,7 @@ export default {
     }
 
     select(work) {
-      this.close({ $value: work._id }); // eslint-disable-line no-underscore-dangle
+      this.close({ $value: work._id });
     }
   },
 };

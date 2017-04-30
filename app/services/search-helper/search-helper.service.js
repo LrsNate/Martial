@@ -6,7 +6,6 @@ export default class SearchHelperService {
     this.$q = $q;
     this.$timeout = $timeout;
 
-    // noinspection JSUnusedLocalSymbols
     this.matchers = {
       string: {
         is(work, field, term) {
@@ -26,7 +25,7 @@ export default class SearchHelperService {
       },
       work: {
         imitates(work, field, term) {
-          return work._id === term.id || // eslint-disable-line no-underscore-dangle
+          return work._id === term.id ||
             work.originId === term.id;
         },
       },

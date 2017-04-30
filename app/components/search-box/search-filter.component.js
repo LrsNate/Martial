@@ -42,7 +42,7 @@ export default {
         this.worksDao.getWorks().then((works) => {
           this.values = _.map(works, work => ({
             name: `${work.author}: ${work.reference}`,
-            id: work._id, // eslint-disable-line no-underscore-dangle
+            id: work._id,
           }));
         });
       } else if (field.id) {

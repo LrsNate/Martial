@@ -65,7 +65,7 @@ export default class WorksDaoService {
   }
 
   updateWork(work) {
-    const id = work._id; // eslint-disable-line no-underscore-dangle
+    const id = work._id;
     return this.$q((resolve) => {
       this.db.update({ _id: id }, work, () => {
         resolve();
@@ -74,7 +74,7 @@ export default class WorksDaoService {
   }
 
   deleteWork(work) {
-    const id = work._id; // eslint-disable-line no-underscore-dangle
+    const id = work._id;
     return this.$q((resolve) => {
       this.db.remove({ _id: id }, () => {
         this.db.update({ originId: id }, { $unset: { originId: 1 } }, { multi: true }, () => {

@@ -18,7 +18,6 @@ export default class SortHelperService {
 
     const numeralFirstReference = reference[0] === 'De Spectaculis' ? 0 : this.ofRoman(reference[0]);
     const refCore = parseInt(reference[1], 10);
-    // noinspection ES6ModulesDependencies
     const refPostfix = reference[1].substr(Math.log10(refCore));
 
     return [
@@ -35,7 +34,7 @@ export default class SortHelperService {
     if (doc.originId) {
       const originWork = _.find(
         docs,
-        o => doc.originId === o._id, // eslint-disable-line no-underscore-dangle
+        o => doc.originId === o._id,
       );
       if (originWork.author === 'Martial') {
         return originWork.reference;
