@@ -2,6 +2,8 @@ import angular from 'angular';
 import 'angular-route';
 import 'angular-animate';
 import 'angular-sanitize';
+
+import './app.scss';
 import NavigationBar from './components/navigation-bar';
 import Version from './components/version';
 import Add from './routes/add';

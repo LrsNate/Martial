@@ -1,6 +1,8 @@
+import template from './list-input.template.html';
+
 export default {
   selector: 'listInput',
-  templateUrl: 'components/work-editor/list-input.template.html',
+  template,
   bindings: {
     elements: '=',
     placeholder: '@',

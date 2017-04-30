@@ -1,8 +1,9 @@
 import WorkSelectorComponent from './work-selector.component';
+import template from './work-editor.template.html';
 
 export default {
   selector: 'workEditor',
-  templateUrl: 'components/work-editor/work-editor.template.html',
+  template,
   bindings: {
     work: '=',
   },
@@ -12,7 +13,9 @@ export default {
       this.$uibModal = $uibModal;
       this.worksDao = worksDao;
       this.editedVice = '';
+    }
 
+    $onInit() {
       this.resolveOriginReference();
     }
 
@@ -53,7 +56,6 @@ export default {
       if (this.work.originId) {
         this.worksDao.getWork(this.work.originId).then((work) => {
           this.originWork = work;
-          // noinspection JSUnusedGlobalSymbols
           this.originReference = `${work.author}: ${work.reference}`;
         });
       } else {

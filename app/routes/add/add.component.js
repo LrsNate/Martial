@@ -1,6 +1,8 @@
+import template from './add.template.html';
+
 export default {
   selector: 'add',
-  templateUrl: 'routes/add/add.template.html',
+  template,
   controller: class {
 
     constructor($location, worksDao) {

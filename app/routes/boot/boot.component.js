@@ -1,6 +1,8 @@
+import template from './boot.template.html';
+
 export default {
   selector: 'boot',
-  templateUrl: 'routes/boot/boot.template.html',
+  template,
   controller: class {
 
     constructor($location, $scope, $timeout, databaseHelper, fileHelper) {

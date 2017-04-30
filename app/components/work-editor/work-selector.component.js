@@ -1,6 +1,8 @@
+import template from './work-selector.template.html';
+
 export default {
   selector: 'workSelector',
-  templateUrl: 'components/work-editor/work-selector.template.html',
+  template,
   bindings: {
     close: '&',
     dismiss: '&',

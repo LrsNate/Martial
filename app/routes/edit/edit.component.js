@@ -1,8 +1,10 @@
 import ConfirmDeleteWorkComponent from '../../components/confirm-delete-work/confirm-delete-work.component';
 
+import template from './edit.template.html';
+
 export default {
   selector: 'edit',
-  templateUrl: 'routes/edit/edit.template.html',
+  template,
   controller: class {
 
     constructor($routeParams, $uibModal, $location, worksDao) {

@@ -1,8 +1,10 @@
+import template from './work-display.template.html';
+
 export default {
-  templateUrl: 'components/work-display/work-display.template.html',
+  template,
   selector: 'workDisplay',
   bindings: {
-    work: '=',
+    work: '<',
     onDelete: '&',
   },
   controller: class {

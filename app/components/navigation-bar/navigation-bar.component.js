@@ -1,5 +1,7 @@
+import template from './navigation-bar.template.html';
+
 export default {
-  templateUrl: 'components/navigation-bar/navigation-bar.template.html',
+  template,
   controller: class {
 
     constructor($scope, $location) {

@@ -1,6 +1,8 @@
+import template from './confirm-delete-work.template.html';
+
 export default {
   selector: 'confirmDeleteWork',
-  templateUrl: 'components/confirm-delete-work/confirm-delete-work.template.html',
+  template,
   bindings: {
     close: '&',
     dismiss: '&',

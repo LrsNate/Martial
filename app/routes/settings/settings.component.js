@@ -1,6 +1,8 @@
+import template from './settings.template.html';
+
 export default {
   selector: 'settings',
-  templateUrl: 'routes/settings/settings.template.html',
+  template,
   controller: class {
 
     constructor(databaseHelper, worksDao, $scope) {

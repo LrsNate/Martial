@@ -1,8 +1,10 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
+
+import template from './text-display.template.html';
 
 export default {
   selector: 'textDisplay',
-  templateUrl: 'components/work-display/text-display.template.html',
+  template,
   bindings: {
     work: '<',
     referenceWork: '<',

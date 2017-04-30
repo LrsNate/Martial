@@ -1,9 +1,11 @@
+import template from './download-progress.template.html';
+
 export default {
   bindings: {
-    achieved: '=',
-    total: '=',
+    achieved: '<',
+    total: '<',
   },
-  templateUrl: 'components/download-progress/download-progress.template.html',
+  template,
   controller: class {
 
     constructor($scope) {

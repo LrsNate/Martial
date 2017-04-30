@@ -1,7 +1,9 @@
-const _ = require('lodash');
+import _ from 'lodash';
+
+import template from './search-filter.template.html';
 
 export default {
-  templateUrl: 'components/search-box/search-filter.template.html',
+  template,
   bindings: {
     filter: '=',
     onUpdate: '&',

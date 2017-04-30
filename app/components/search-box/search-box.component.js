@@ -1,5 +1,7 @@
+import template from './search-box.template.html';
+
 export default {
-  templateUrl: 'components/search-box/search-box.template.html',
+  template,
   bindings: {
     filters: '=',
     phraseFilter: '=',

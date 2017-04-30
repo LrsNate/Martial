@@ -1,8 +1,10 @@
 import _ from 'lodash';
 
+import template from './work-attribute.template.html';
+
 export default {
   selector: 'workAttribute',
-  templateUrl: 'components/work-display/work-attribute.template.html',
+  template,
   bindings: {
     name: '@',
     value: '<',

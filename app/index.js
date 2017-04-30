@@ -5,7 +5,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 const autoUpdater = electron.autoUpdater;
-const appVersion = require('./package.json').version;
+const appVersion = app.getVersion();
 
 if (process.env.NODE_ENV !== 'development') {
   const updateFeed = 'https://martial-releases.herokuapp.com/update';

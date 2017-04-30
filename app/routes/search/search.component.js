@@ -1,8 +1,10 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
+
+import template from './search.template.html';
 
 export default {
   selector: 'search',
-  templateUrl: 'routes/search/search.template.html',
+  template,
   controller: class {
 
     constructor($location, $scope, worksDao, searchHelper) {
