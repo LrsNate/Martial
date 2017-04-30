@@ -1,0 +1,15 @@
+list-input {
+  .add-input {
+    margin-bottom: 10px;
+  }
+
+  .elements-list {
+    list-style-type: none;
+    padding-left: 0;
+    column-count: 2;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+}

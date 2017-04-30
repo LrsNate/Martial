@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import template from './search.template.html';
+import './search.style.scss';
 
 export default {
   selector: 'search',

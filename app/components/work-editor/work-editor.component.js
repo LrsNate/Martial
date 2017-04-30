@@ -1,5 +1,6 @@
 import WorkSelectorComponent from './work-selector.component';
 import template from './work-editor.template.html';
+import './work-editor.style.scss';
 
 export default {
   selector: 'workEditor',

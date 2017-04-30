@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import template from './work-attribute.template.html';
+import './work-attribute.style.scss';
 
 export default {
   selector: 'workAttribute',

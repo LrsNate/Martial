@@ -2,7 +2,7 @@
     <label class="col-sm-3 control-label" ng-bind="$ctrl.label"></label>
     <div class="col-sm-9">
         <form ng-submit="$ctrl.addElement()">
-            <div class="input-group vice-input">
+            <div class="input-group add-input">
                 <input type="text" class="form-control" ng-model="$ctrl.editedElement" ng-attr-placeholder="{{$ctrl.placeholder}}" />
                 <span class="input-group-btn">
                     <a role="button" class="btn btn-success" ng-click="$ctrl.addElement()">
@@ -12,7 +12,7 @@
             </div>
         </form>
         <div>
-            <ul class="vices-list">
+            <ul class="elements-list">
                 <li ng-repeat="element in $ctrl.elements track by $index">
                     <a type="button" class="btn btn-xs btn-danger" ng-click="$ctrl.deleteElement($index)">
                         <span class="glyphicon glyphicon-remove"></span>

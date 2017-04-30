@@ -1,4 +1,5 @@
 import template from './list-input.template.html';
+import './list-input.style.scss';
 
 export default {
   selector: 'listInput',

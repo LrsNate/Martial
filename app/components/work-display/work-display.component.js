@@ -1,4 +1,5 @@
 import template from './work-display.template.html';
+import './work-display.style.scss';
 
 export default {
   template,
