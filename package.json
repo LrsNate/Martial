@@ -27,7 +27,7 @@
     "webpack": "^2.4.1"
   },
   "scripts": {
-    "postinstall": "install-app-deps",
+    "postinstall": "cd app && npm install",
     "start": "cross-env NODE_ENV=development electron dist/generated-src",
     "lint": "eslint 'app/**/*.js'",
     "webpack": "webpack --progress --colors --config webpack.config.prod.js",
