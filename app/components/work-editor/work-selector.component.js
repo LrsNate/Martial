@@ -1,4 +1,5 @@
 import template from './work-selector.template.html';
+import './work-selector.style.scss';
 
 export default {
   selector: 'workSelector',
