@@ -5,35 +5,5 @@
     <h3 class="modal-title" id="modal-title">Sélectionner une référence</h3>
 </div>
 <div class="modal-body" id="modal-body">
-    <search-box filters="$ctrl.filters" on-update="$ctrl.refreshFilters()" phrase-filter="$ctrl.phraseFilter"></search-box>
-
-    <hr/>
-
-    <h5>{{ displayedWorks.length }} résultats</h5>
-
-    <table class="table table-striped" id="search-results">
-        <thead>
-        <tr>
-            <th>Auteur</th>
-            <th>Référence</th>
-            <th>Texte</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="work in displayedWorks=($ctrl.works | filter: $ctrl.phraseFilter) | limitTo: 50 track by work._id">
-            <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.author }}</td>
-            <td ng-click="$ctrl.setSelectedWork(work)">{{ ::work.reference }}</td>
-            <td ng-click="$ctrl.setSelectedWork(work)">
-                {{ work.latinText || work.frenchText | incipit: 50 }}
-            </td>
-            <td>
-                <a type="button"
-                   ng-click="$ctrl.select(work)"
-                   class="btn btn-sm btn-default">Sélectionner</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <h5 class="works-status" ng-if="!displayedWorks.length" ng-bind="$ctrl.statusMessage"></h5>
+    <work-search action="Sélectionner" on-action="$ctrl.select(work)"></work-search>
 </div>
