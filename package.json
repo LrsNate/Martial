@@ -32,7 +32,7 @@
     "start": "cross-env NODE_ENV=development electron dist/generated-src",
     "lint": "eslint 'app/**/*.js'",
     "webpack": "webpack --progress --colors --config webpack.config.prod.js",
-    "webpack-watch": "webpack --progress --colors --watch",
+    "watch": "webpack --progress --colors --watch",
     "pack": "build --dir",
     "predist": "npm run webpack",
     "dist": "build"

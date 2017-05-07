@@ -1,10 +1,15 @@
+The project has been renamed and is continuing at https://github.com/LrsNate/Fourmi
+
 # Martial
 
-Une base de données pour manipuler et visualiser des oeuvres de Martial,
-ainsi que leurs imitations.
+A database of epigrams from Martial, along with imitations and other works that
+reference those epigrams.
 
-## Compilation et exécution
+## How to run the project
+
+In two separate terminals, run:
 
 ```
+npm run watch
 npm start
 ```
