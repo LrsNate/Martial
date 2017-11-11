@@ -1,10 +1,9 @@
 const electron = require('electron'); // eslint-disable-line
 // Module to control application life.
-const app = electron.app;
+const { app, autoUpdater, Menu } = electron;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const autoUpdater = electron.autoUpdater;
 const appVersion = app.getVersion();
 
 if (process.env.NODE_ENV !== 'development') {
@@ -34,6 +33,27 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({ width: 1000, height: 700 });
+
+  const template = [{
+    label: 'Application',
+    submenu: [
+      { label: 'À propos', selector: 'orderFrontStandardAboutPanel:' },
+      { type: 'separator' },
+      { label: 'Quitter', accelerator: 'Command+Q', click() { app.quit(); } },
+    ] }, {
+      label: 'Éditer',
+      submenu: [
+      { label: 'Annuler', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+      { label: 'Restaurer', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+      { type: 'separator' },
+      { label: 'Couper', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+      { label: 'Copier', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+      { label: 'Coller', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+      { label: 'Tout sélectionner', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' },
+      ] },
+  ];
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`);
